@@ -1,325 +1,953 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MSS Lead Automation — System Overview</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap');
-:root{--ink:#1c1b19;--ink2:#4a4845;--ink3:#888680;--bg:#faf8f5;--bg2:#f2efe9;--bg3:#e8e4dc;--border:#ddd9d0;--accent:#4F46E5;--green:#059669;--amber:#d97706;--red:#dc2626;--blue:#2563eb;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px;}
-.cover{background:var(--ink);color:var(--bg);padding:80px 64px 64px;position:relative;overflow:hidden;}
-.cover::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:var(--accent);opacity:.1;}
-.cover::after{content:'';position:absolute;bottom:-60px;left:200px;width:300px;height:300px;border-radius:50%;background:#7c3aed;opacity:.07;}
-.cover-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#7a7875;margin-bottom:24px;}
-.cover h1{font-family:'Fraunces',serif;font-size:54px;font-weight:700;line-height:1.08;margin-bottom:20px;max-width:600px;}
-.cover h1 em{color:#a5b4fc;font-style:normal;}
-.cover-desc{font-size:16px;color:#9d9a96;max-width:520px;line-height:1.7;}
-.cover-brands{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;}
-.cover-brand{padding:8px 16px;border-radius:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;}
-.cover-brand.t{background:#312e81;color:#a5b4fc;}
-.cover-brand.d{background:#064e3b;color:#6ee7b7;}
-.cover-brand.m{background:#78350f;color:#fcd34d;}
-.cover-stats{margin-top:48px;display:flex;gap:40px;flex-wrap:wrap;}
-.cover-stat{border-left:2px solid #3a3835;padding-left:16px;}
-.cover-stat .val{font-family:'Fraunces',serif;font-size:28px;color:white;display:block;}
-.cover-stat .lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;color:#7a7875;text-transform:uppercase;}
-.toc-bar{background:white;border-bottom:1px solid var(--border);padding:0 40px;position:sticky;top:0;z-index:100;display:flex;gap:0;overflow-x:auto;}
-.toc-bar a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);text-decoration:none;padding:14px 16px;white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;}
-.toc-bar a:hover{color:var(--accent);border-bottom-color:var(--accent);}
-.page{max-width:860px;margin:0 auto;padding:64px 40px;}
-.section{margin-bottom:72px;}
-.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
-h2{font-family:'Fraunces',serif;font-size:34px;font-weight:600;line-height:1.15;margin-bottom:20px;color:var(--ink);}
-h3{font-size:17px;font-weight:600;margin:32px 0 12px;color:var(--ink);}
-p{margin-bottom:16px;color:var(--ink2);}
-.callout{border-radius:10px;padding:18px 22px;margin:20px 0;border-left:3px solid;font-size:14px;line-height:1.65;}
-.callout strong{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;}
-.callout.info{background:#eff6ff;border-color:#3b82f6;color:#1e3a5f;}
-.callout.info strong{color:#2563eb;}
-.callout.success{background:#f0fdf4;border-color:#22c55e;color:#14532d;}
-.callout.success strong{color:#15803d;}
-.diagram-wrap{background:white;border:1px solid var(--border);border-radius:14px;padding:32px 24px 20px;margin:28px 0;overflow-x:auto;}
-.diagram-cap{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--ink3);text-align:center;margin-top:14px;text-transform:uppercase;}
-.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
-.card-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:24px 0;}
-.card{background:white;border:1px solid var(--border);border-radius:12px;padding:22px;}
-.card .card-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;}
-.card h4{margin:0 0 8px;font-size:15px;}
-.card p{font-size:13px;color:var(--ink2);margin:0;line-height:1.6;}
-.brand-card{border-radius:12px;padding:22px;border:1px solid var(--border);background:white;}
-.brand-card.trakop{border-top:4px solid var(--accent);}
-.brand-card.dairy{border-top:4px solid var(--green);}
-.brand-card.mss{border-top:4px solid var(--amber);}
-.brand-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;}
-.brand-label.t{color:var(--accent);}
-.brand-label.d{color:var(--green);}
-.brand-label.m{color:var(--amber);}
-.step-flow{margin:24px 0;}
-.step{display:flex;gap:18px;align-items:flex-start;margin-bottom:6px;position:relative;}
-.step::before{content:'';position:absolute;left:19px;top:42px;width:2px;height:calc(100% + 6px);background:var(--border);}
-.step:last-child::before{display:none;}
-.step-num{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:white;flex-shrink:0;z-index:1;}
-.step-body{background:white;border:1px solid var(--border);border-radius:10px;padding:16px 18px;flex:1;}
-.step-body h4{margin:0 0 4px;font-size:14px;}
-.step-body p{font-size:13px;color:var(--ink2);margin:0;line-height:1.55;}
-.tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0;}
-.tier{border-radius:10px;padding:16px 14px;text-align:center;border:1px solid var(--border);}
-.tier .tier-score{font-family:'Fraunces',serif;font-size:22px;font-weight:700;display:block;margin-bottom:3px;}
-.tier .tier-name{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:6px;}
-.tier .tier-desc{font-size:11px;color:var(--ink2);}
-.tier.hot{background:#fef2f2;border-color:#fca5a5;}.tier.hot .tier-score,.tier.hot .tier-name{color:#dc2626;}
-.tier.warm{background:#fffbeb;border-color:#fcd34d;}.tier.warm .tier-score,.tier.warm .tier-name{color:#d97706;}
-.tier.cool{background:#f0f9ff;border-color:#7dd3fc;}.tier.cool .tier-score,.tier.cool .tier-name{color:#0284c7;}
-.tier.cold{background:#f9fafb;border-color:#d1d5db;}.tier.cold .tier-score,.tier.cold .tier-name{color:#6b7280;}
-code{font-family:'IBM Plex Mono',monospace;font-size:12px;background:var(--bg3);padding:2px 6px;border-radius:4px;color:var(--ink);}
-.tg-wrap{background:#17212b;border-radius:14px;padding:24px;margin:24px 0;}
-.tg-bubble{background:#212d3b;border-radius:12px;padding:18px 20px;max-width:480px;color:#e8e8e8;font-size:13px;line-height:1.75;}
-.tg-bubble pre{background:transparent;color:#e8e8e8;padding:0;margin:0;font-size:12px;line-height:1.8;white-space:pre-wrap;font-family:'IBM Plex Mono',monospace;}
-.badge{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:500;font-family:'IBM Plex Mono',monospace;}
-.badge.green{background:#dcfce7;color:#166534;}
-.badge.amber{background:#fef3c7;color:#92400e;}
-.badge.red{background:#fee2e2;color:#991b1b;}
-.badge.gray{background:#f3f4f6;color:#374151;}
-.table-wrap{overflow-x:auto;margin:20px 0;}
-table{width:100%;border-collapse:collapse;font-size:14px;}
-thead th{background:var(--ink);color:var(--bg);padding:10px 14px;text-align:left;font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase;}
-td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.5;}
-tr:nth-child(even) td{background:var(--bg2);}
-hr{border:none;border-top:1px solid var(--border);margin:52px 0;}
-.footer{background:var(--ink);color:#5a5855;text-align:center;padding:32px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;}
-@media(max-width:640px){
-  .cover{padding:40px 24px 32px;}.cover h1{font-size:34px;}
-  .page{padding:40px 20px;}
-  .card-grid,.card-grid-3,.tier-grid{grid-template-columns:1fr;}
-  .toc-bar{padding:0 20px;}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSS Lead Automation — System Overview</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap');
+
+    :root {
+      --ink: #1c1b19;
+      --ink2: #4a4845;
+      --ink3: #888680;
+      --bg: #faf8f5;
+      --bg2: #f2efe9;
+      --bg3: #e8e4dc;
+      --border: #ddd9d0;
+      --accent: #4F46E5;
+      --green: #059669;
+      --amber: #d97706;
+      --red: #dc2626;
+      --blue: #2563eb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    .cover {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 80px 64px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: .1;
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: 200px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: #7c3aed;
+      opacity: .07;
+    }
+
+    .cover-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #7a7875;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 54px;
+      font-weight: 700;
+      line-height: 1.08;
+      margin-bottom: 20px;
+      max-width: 600px;
+    }
+
+    .cover h1 em {
+      color: #a5b4fc;
+      font-style: normal;
+    }
+
+    .cover-desc {
+      font-size: 16px;
+      color: #9d9a96;
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    .cover-brands {
+      margin-top: 32px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cover-brand {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .08em;
+    }
+
+    .cover-brand.t {
+      background: #312e81;
+      color: #a5b4fc;
+    }
+
+    .cover-brand.d {
+      background: #064e3b;
+      color: #6ee7b7;
+    }
+
+    .cover-brand.m {
+      background: #78350f;
+      color: #fcd34d;
+    }
+
+    .cover-stats {
+      margin-top: 48px;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .cover-stat {
+      border-left: 2px solid #3a3835;
+      padding-left: 16px;
+    }
+
+    .cover-stat .val {
+      font-family: 'Fraunces', serif;
+      font-size: 28px;
+      color: white;
+      display: block;
+    }
+
+    .cover-stat .lbl {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .1em;
+      color: #7a7875;
+      text-transform: uppercase;
+    }
+
+    .toc-bar {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+
+    .toc-bar a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      text-decoration: none;
+      padding: 14px 16px;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+
+    .toc-bar a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 40px;
+    }
+
+    .section {
+      margin-bottom: 72px;
+    }
+
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      color: var(--ink);
+    }
+
+    h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 32px 0 12px;
+      color: var(--ink);
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--ink2);
+    }
+
+    .callout {
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 20px 0;
+      border-left: 3px solid;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .callout strong {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .callout.info {
+      background: #eff6ff;
+      border-color: #3b82f6;
+      color: #1e3a5f;
+    }
+
+    .callout.info strong {
+      color: #2563eb;
+    }
+
+    .callout.success {
+      background: #f0fdf4;
+      border-color: #22c55e;
+      color: #14532d;
+    }
+
+    .callout.success strong {
+      color: #15803d;
+    }
+
+    .diagram-wrap {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 24px 20px;
+      margin: 28px 0;
+      overflow-x: auto;
+    }
+
+    .diagram-cap {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .08em;
+      color: var(--ink3);
+      text-align: center;
+      margin-top: 14px;
+      text-transform: uppercase;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .card-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+    }
+
+    .card .card-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 8px;
+    }
+
+    .card h4 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--ink2);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .brand-card {
+      border-radius: 12px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      background: white;
+    }
+
+    .brand-card.trakop {
+      border-top: 4px solid var(--accent);
+    }
+
+    .brand-card.dairy {
+      border-top: 4px solid var(--green);
+    }
+
+    .brand-card.mss {
+      border-top: 4px solid var(--amber);
+    }
+
+    .brand-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .brand-label.t {
+      color: var(--accent);
+    }
+
+    .brand-label.d {
+      color: var(--green);
+    }
+
+    .brand-label.m {
+      color: var(--amber);
+    }
+
+    .step-flow {
+      margin: 24px 0;
+    }
+
+    .step {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      position: relative;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 42px;
+      width: 2px;
+      height: calc(100% + 6px);
+      background: var(--border);
+    }
+
+    .step:last-child::before {
+      display: none;
+    }
+
+    .step-num {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: white;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .step-body {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      flex: 1;
+    }
+
+    .step-body h4 {
+      margin: 0 0 4px;
+      font-size: 14px;
+    }
+
+    .step-body p {
+      font-size: 13px;
+      color: var(--ink2);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .tier {
+      border-radius: 10px;
+      padding: 16px 14px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .tier .tier-score {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .tier .tier-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .tier .tier-desc {
+      font-size: 11px;
+      color: var(--ink2);
+    }
+
+    .tier.hot {
+      background: #fef2f2;
+      border-color: #fca5a5;
+    }
+
+    .tier.hot .tier-score,
+    .tier.hot .tier-name {
+      color: #dc2626;
+    }
+
+    .tier.warm {
+      background: #fffbeb;
+      border-color: #fcd34d;
+    }
+
+    .tier.warm .tier-score,
+    .tier.warm .tier-name {
+      color: #d97706;
+    }
+
+    .tier.cool {
+      background: #f0f9ff;
+      border-color: #7dd3fc;
+    }
+
+    .tier.cool .tier-score,
+    .tier.cool .tier-name {
+      color: #0284c7;
+    }
+
+    .tier.cold {
+      background: #f9fafb;
+      border-color: #d1d5db;
+    }
+
+    .tier.cold .tier-score,
+    .tier.cold .tier-name {
+      color: #6b7280;
+    }
+
+    code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      background: var(--bg3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--ink);
+    }
+
+    .tg-wrap {
+      background: #17212b;
+      border-radius: 14px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .tg-bubble {
+      background: #212d3b;
+      border-radius: 12px;
+      padding: 18px 20px;
+      max-width: 480px;
+      color: #e8e8e8;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .tg-bubble pre {
+      background: transparent;
+      color: #e8e8e8;
+      padding: 0;
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 500;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .badge.green {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge.amber {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .badge.red {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .badge.gray {
+      background: #f3f4f6;
+      color: #374151;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead th {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--ink2);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    tr:nth-child(even) td {
+      background: var(--bg2);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 52px 0;
+    }
+
+    .footer {
+      background: var(--ink);
+      color: #5a5855;
+      text-align: center;
+      padding: 32px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .08em;
+    }
+
+    @media(max-width:640px) {
+      .cover {
+        padding: 40px 24px 32px;
+      }
+
+      .cover h1 {
+        font-size: 34px;
+      }
+
+      .page {
+        padding: 40px 20px;
+      }
+
+      .card-grid,
+      .card-grid-3,
+      .tier-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toc-bar {
+        padding: 0 20px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- COVER -->
-<div class="cover">
-  <div class="cover-eyebrow">Master Software Solutions · System Overview · May 2026</div>
-  <h1>Lead Automation<br><em>Platform</em></h1>
-  <p class="cover-desc">An AI-powered system that prepares every inbound lead before the sales team ever sees it — researched, scored, and ready to act on.</p>
-  <div class="cover-brands">
-    <div class="cover-brand t">Trakop</div>
-    <div class="cover-brand d">DairyTech.ai</div>
-    <div class="cover-brand m">Master Software Solutions</div>
-  </div>
-  <div class="cover-stats">
-    <div class="cover-stat"><span class="val">3</span><span class="lbl">Brands covered</span></div>
-    <div class="cover-stat"><span class="val">7</span><span class="lbl">Web searches / lead</span></div>
-    <div class="cover-stat"><span class="val">~3 min</span><span class="lbl">Form to Telegram</span></div>
-    <div class="cover-stat"><span class="val">0</span><span class="lbl">Leads silently dropped</span></div>
-  </div>
-</div>
-
-<!-- NAV -->
-<nav class="toc-bar">
-  <a href="#overview">Overview</a>
-  <a href="#brands">Brands</a>
-  <a href="#how">How it works</a>
-  <a href="#scoring">ICP Scoring</a>
-  <a href="#output">Output</a>
-  <a href="#reliability">Reliability</a>
-</nav>
-
-<div class="page">
-
-<!-- SECTION 1: OVERVIEW -->
-<div class="section" id="overview">
-  <div class="eyebrow">Section 01 — Overview</div>
-  <h2>Built to augment — not replace</h2>
-
-  <p>When a prospect submits an enquiry form for any of MSS's three brands, someone on the team needs to act on it. That means understanding who they are, whether they're a real fit, and how to open the conversation well. That work takes time — and it has to happen for every lead, every day, across three brands.</p>
-
-  <p>This system handles the preparation. By the time the sales team opens a Telegram notification, the lead has already been validated, researched across the web, and scored against a brand-specific 100-point Ideal Customer Profile. The research is done. The team focuses entirely on the conversation and the decision — not the legwork before it.</p>
-
-  <div class="callout success">
-    <strong>Core principle</strong>
-    Every decision — who to call, how to pitch, whether to follow up — stays with the team. The system handles the research and preparation so those decisions can be made faster, with better information.
-  </div>
-
-  <div class="diagram-wrap">
-    <svg width="100%" viewBox="0 0 720 100" role="img">
-      <title>End-to-end flow</title>
-      <defs><marker id="a0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-      <rect x="4" y="28" width="100" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="54" y="46" text-anchor="middle" dominant-baseline="central">Form</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="54" y="62" text-anchor="middle" dominant-baseline="central">submitted</text>
-      <line x1="106" y1="50" x2="118" y2="50" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
-      <rect x="120" y="28" width="110" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="175" y="46" text-anchor="middle" dominant-baseline="central">Validate</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="175" y="62" text-anchor="middle" dominant-baseline="central">spam · dupes · rivals</text>
-      <line x1="232" y1="50" x2="244" y2="50" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
-      <rect x="246" y="28" width="110" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="301" y="46" text-anchor="middle" dominant-baseline="central">ICP Score</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="301" y="62" text-anchor="middle" dominant-baseline="central">0–100 per brand</text>
-      <line x1="358" y1="50" x2="370" y2="50" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
-      <rect x="372" y="28" width="110" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="427" y="46" text-anchor="middle" dominant-baseline="central">Research</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="427" y="62" text-anchor="middle" dominant-baseline="central">7 web searches</text>
-      <line x1="484" y1="50" x2="496" y2="50" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
-      <rect x="498" y="28" width="110" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="553" y="46" text-anchor="middle" dominant-baseline="central">Cross-check</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="553" y="62" text-anchor="middle" dominant-baseline="central">validate findings</text>
-      <line x1="610" y1="50" x2="622" y2="50" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
-      <rect x="624" y="28" width="90" height="44" rx="7" fill="#1c1b19" stroke="#1c1b19"/>
-      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="white" x="669" y="46" text-anchor="middle" dominant-baseline="central">Telegram</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#9d9a96" x="669" y="62" text-anchor="middle" dominant-baseline="central">sales briefing</text>
-    </svg>
-    <div class="diagram-cap">Fig 1.1 — Every lead travels through all five steps before reaching the team</div>
-  </div>
-</div>
-
-<hr>
-
-<!-- SECTION 2: BRANDS -->
-<div class="section" id="brands">
-  <div class="eyebrow">Section 02 — Brands</div>
-  <h2>Three brands, one pipeline</h2>
-  <p>Each brand has its own form, its own customer type, and its own scoring model. The pipeline detects which brand a lead came from and automatically applies the right criteria throughout. Nothing needs to be configured manually for each submission.</p>
-
-  <div class="card-grid-3">
-    <div class="brand-card trakop">
-      <div class="brand-label t">Trakop</div>
-      <h4 style="margin:8px 0 10px;">Delivery Scheduling SaaS</h4>
-      <p style="font-size:13px;color:var(--ink2);margin:0;">For businesses that run recurring delivery routes with their own fleet — dairy, water, meals, groceries, pharmacy, and similar. Typically 50–2,000 customers or 20–1,000 orders/day.</p>
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-eyebrow">Master Software Solutions · System Overview · May 2026</div>
+    <h1>Lead Automation<br><em>Platform</em></h1>
+    <p class="cover-desc">An AI-powered system that prepares every inbound lead before the sales team ever sees it —
+      researched, scored, and ready to act on.</p>
+    <div class="cover-brands">
+      <div class="cover-brand t">Trakop</div>
+      <div class="cover-brand d">DairyTech.ai</div>
+      <div class="cover-brand m">Master Software Solutions</div>
     </div>
-    <div class="brand-card dairy">
-      <div class="brand-label d">DairyTech.ai</div>
-      <h4 style="margin:8px 0 10px;">AI-Driven Dairy ERP</h4>
-      <p style="font-size:13px;color:var(--ink2);margin:0;">Full dairy supply chain — procurement, farmer payments, production, quality, cold chain, van sales, and analytics. For dairy manufacturers, distributors, and cooperatives of any size.</p>
-    </div>
-    <div class="brand-card mss">
-      <div class="brand-label m">Master Software Solutions</div>
-      <h4 style="margin:8px 0 10px;">Custom Software & Digital Transformation</h4>
-      <p style="font-size:13px;color:var(--ink2);margin:0;">ERP, CRM, AI agents, and custom application development. For mid-to-enterprise businesses needing a defined software project — automation, implementation, or full digital transformation.</p>
+    <div class="cover-stats">
+      <div class="cover-stat"><span class="val">3</span><span class="lbl">Brands covered</span></div>
+      <div class="cover-stat"><span class="val">7</span><span class="lbl">Web searches / lead</span></div>
+      <div class="cover-stat"><span class="val">~3 min</span><span class="lbl">Form to Telegram</span></div>
+      <div class="cover-stat"><span class="val">0</span><span class="lbl">Leads silently dropped</span></div>
     </div>
   </div>
-</div>
 
-<hr>
+  <!-- NAV -->
+  <nav class="toc-bar">
+    <a href="#overview">Overview</a>
+    <a href="#brands">Brands</a>
+    <a href="#how">How it works</a>
+    <a href="#scoring">ICP Scoring</a>
+    <a href="#output">Output</a>
+    <a href="#reliability">Reliability</a>
+  </nav>
 
-<!-- SECTION 3: HOW IT WORKS -->
-<div class="section" id="how">
-  <div class="eyebrow">Section 03 — How it works</div>
-  <h2>What happens after someone submits a form</h2>
-  <p>The pipeline runs automatically — no one needs to trigger it. Here is what happens in the roughly three minutes between a form submission and the Telegram notification.</p>
+  <div class="page">
 
-  <div class="step-flow">
-    <div class="step">
-      <div class="step-num" style="background:#4F46E5;">0</div>
-      <div class="step-body">
-        <h4>Source detection &amp; field normalisation</h4>
-        <p>The system identifies which brand the lead came from by reading the form fields — Trakop leads have delivery volume fields, DairyTech leads have a dairy domain selector, MSS leads have a general message. Field names from different forms are mapped to a common format before anything else runs.</p>
+    <!-- SECTION 1: OVERVIEW -->
+    <div class="section" id="overview">
+      <div class="eyebrow">Section 01 — Overview</div>
+      <h2>What this system does</h2>
+
+      <p>When a prospect submits an enquiry form for any of MSS's three brands, someone on the team needs to act on it.
+        That means understanding who they are, whether they're a real fit, and how to open the conversation well. That
+        work takes time — and it has to happen for every lead, every day, across three brands.</p>
+
+      <p>This system handles the preparation. By the time the sales team opens a Telegram notification, the lead has
+        already been validated, researched across the web, and scored against a brand-specific 100-point Ideal Customer
+        Profile. The research is done. The team focuses entirely on the conversation and the decision — not the legwork
+        before it.</p>
+
+      <div class="callout success">
+        <strong>Core principle</strong>
+        Every decision — who to call, how to pitch, whether to follow up — stays with the team. The system handles the
+        research and preparation so those decisions can be made faster, with better information.
+      </div>
+
+      <div class="diagram-wrap">
+        <svg width="100%" viewBox="0 0 720 100" role="img">
+          <title>End-to-end flow</title>
+          <defs>
+            <marker id="a0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6"
+              orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </marker>
+          </defs>
+          <rect x="4" y="28" width="100" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8" />
+          <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="54" y="46"
+            text-anchor="middle" dominant-baseline="central">Form</text>
+          <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="54" y="62" text-anchor="middle"
+            dominant-baseline="central">submitted</text>
+          <line x1="106" y1="50" x2="118" y2="50" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)" />
+          <rect x="120" y="28" width="110" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8" />
+          <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="175" y="46"
+            text-anchor="middle" dominant-baseline="central">Validate</text>
+          <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="175" y="62" text-anchor="middle"
+            dominant-baseline="central">spam · dupes · rivals</text>
+          <line x1="232" y1="50" x2="244" y2="50" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)" />
+          <rect x="246" y="28" width="110" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8" />
+          <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="301" y="46"
+            text-anchor="middle" dominant-baseline="central">ICP Score</text>
+          <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="301" y="62" text-anchor="middle"
+            dominant-baseline="central">0–100 per brand</text>
+          <line x1="358" y1="50" x2="370" y2="50" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)" />
+          <rect x="372" y="28" width="110" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8" />
+          <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="427" y="46"
+            text-anchor="middle" dominant-baseline="central">Research</text>
+          <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="427" y="62" text-anchor="middle"
+            dominant-baseline="central">7 web searches</text>
+          <line x1="484" y1="50" x2="496" y2="50" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)" />
+          <rect x="498" y="28" width="110" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8" />
+          <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="553" y="46"
+            text-anchor="middle" dominant-baseline="central">Cross-check</text>
+          <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="553" y="62" text-anchor="middle"
+            dominant-baseline="central">validate findings</text>
+          <line x1="610" y1="50" x2="622" y2="50" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)" />
+          <rect x="624" y="28" width="90" height="44" rx="7" fill="#1c1b19" stroke="#1c1b19" />
+          <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="white" x="669" y="46"
+            text-anchor="middle" dominant-baseline="central">Telegram</text>
+          <text font-family="DM Sans,sans-serif" font-size="10" fill="#9d9a96" x="669" y="62" text-anchor="middle"
+            dominant-baseline="central">sales briefing</text>
+        </svg>
+        <div class="diagram-cap">Fig 1.1 — Every lead travels through all five steps before reaching the team</div>
       </div>
     </div>
-    <div class="step">
-      <div class="step-num" style="background:#dc2626;">1</div>
-      <div class="step-body">
-        <h4>Validation — four checks before anything is saved</h4>
-        <p>Missing or invalid fields → flagged as incomplete. Gibberish names, disposable emails, fake phone numbers → flagged as spam. Email already in the database → flagged as duplicate (the original lead's full report is included in the notification). Email domain matching a known competitor → flagged and stopped. Nothing is saved to the database until all four checks pass.</p>
+
+    <hr>
+
+    <!-- SECTION 2: BRANDS -->
+    <div class="section" id="brands">
+      <div class="eyebrow">Section 02 — Brands</div>
+      <h2>Three brands, one pipeline</h2>
+      <p>Each brand has its own form, its own customer type, and its own scoring model. The pipeline detects which brand
+        a lead came from and automatically applies the right criteria throughout. Nothing needs to be configured
+        manually for each submission.</p>
+
+      <div class="card-grid-3">
+        <div class="brand-card trakop">
+          <div class="brand-label t">Trakop</div>
+          <h4 style="margin:8px 0 10px;">Delivery Scheduling SaaS</h4>
+          <p style="font-size:13px;color:var(--ink2);margin:0;">For businesses that run recurring delivery routes with
+            their own fleet — dairy, water, meals, groceries, pharmacy, and similar. Typically 50–2,000 customers or
+            20–1,000 orders/day.</p>
+        </div>
+        <div class="brand-card dairy">
+          <div class="brand-label d">DairyTech.ai</div>
+          <h4 style="margin:8px 0 10px;">AI-Driven Dairy ERP</h4>
+          <p style="font-size:13px;color:var(--ink2);margin:0;">Full dairy supply chain — procurement, farmer payments,
+            production, quality, cold chain, van sales, and analytics. For dairy manufacturers, distributors, and
+            cooperatives of any size.</p>
+        </div>
+        <div class="brand-card mss">
+          <div class="brand-label m">Master Software Solutions</div>
+          <h4 style="margin:8px 0 10px;">Custom Software & Digital Transformation</h4>
+          <p style="font-size:13px;color:var(--ink2);margin:0;">ERP, CRM, AI agents, and custom application development.
+            For mid-to-enterprise businesses needing a defined software project — automation, implementation, or full
+            digital transformation.</p>
+        </div>
       </div>
     </div>
-    <div class="step">
-      <div class="step-num" style="background:#d97706;">2</div>
-      <div class="step-body">
-        <h4>ICP Scoring — form data only, no searches yet</h4>
-        <p>The lead is scored 0–100 against the Ideal Customer Profile for its brand. Five dimensions: business fit, operational scale, pain points, decision maker quality, and geography. Leads scoring below 30 (COLD) are rejected immediately. Everything else proceeds to research.</p>
+
+    <hr>
+
+    <!-- SECTION 3: HOW IT WORKS -->
+    <div class="section" id="how">
+      <div class="eyebrow">Section 03 — How it works</div>
+      <h2>What happens after someone submits a form</h2>
+      <p>The pipeline runs automatically — no one needs to trigger it. Here is what happens in the roughly three minutes
+        between a form submission and the Telegram notification.</p>
+
+      <div class="step-flow">
+        <div class="step">
+          <div class="step-num" style="background:#4F46E5;">0</div>
+          <div class="step-body">
+            <h4>Source detection &amp; field normalisation</h4>
+            <p>The system identifies which brand the lead came from by reading the form fields — Trakop leads have
+              delivery volume fields, DairyTech leads have a dairy domain selector, MSS leads have a general message.
+              Field names from different forms are mapped to a common format before anything else runs.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:#dc2626;">1</div>
+          <div class="step-body">
+            <h4>Validation — four checks before anything is saved</h4>
+            <p>Missing or invalid fields → flagged as incomplete. Gibberish names, disposable emails, fake phone numbers
+              → flagged as spam. Email already in the database → flagged as duplicate (the original lead's full report
+              is included in the notification). Email domain matching a known competitor → flagged and stopped. Nothing
+              is saved to the database until all four checks pass.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:#d97706;">2</div>
+          <div class="step-body">
+            <h4>ICP Scoring — form data only, no searches yet</h4>
+            <p>The lead is scored 0–100 against the Ideal Customer Profile for its brand. Five dimensions: business fit,
+              operational scale, pain points, decision maker quality, and geography. Leads scoring below 30 (COLD) are
+              rejected immediately. Everything else proceeds to research.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:#0284c7;">3</div>
+          <div class="step-body">
+            <h4>Web research — up to 7 targeted searches</h4>
+            <p>The AI agent runs up to seven searches tailored to the brand and company. It looks for the website,
+              LinkedIn, key contacts, company size, recent news, and — always — a dedicated revenue search. Every claim
+              in the report must be cited with a source URL. No made-up data, no training knowledge used as fact.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:#7c3aed;">3b</div>
+          <div class="step-body">
+            <h4>Cross-validation — score revisited against findings</h4>
+            <p>The preliminary score is revised up or down based on what research actually found. If the business type
+              doesn't match what the form said, or the company scale is very different from what was claimed, the score
+              adjusts accordingly. If the revised score drops below 30, the lead is rejected at this stage — but the
+              full research is included in the rejection notification so the team can see what was found.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:#059669;">4</div>
+          <div class="step-body">
+            <h4>Deliver — full briefing sent to Telegram</h4>
+            <p>The complete lead report is sent to the sales team channel. It includes the ICP score with full
+              reasoning, company research with source links, key contacts, a revenue estimate, and brand-specific sales
+              enablement — a personalised icebreaker, a hypothesised pain point, and a pitch angle. The team has
+              everything they need to open a strong first conversation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <strong>Company name inference</strong>
+        If a lead doesn't provide a company name but uses a business email domain, the system infers the company name
+        from the domain — e.g. <code>info@freshmill.co.ke</code> becomes <strong>Fresh Mill</strong>. Personal email
+        with no company → treated as an individual operator (B2C).
       </div>
     </div>
-    <div class="step">
-      <div class="step-num" style="background:#0284c7;">3</div>
-      <div class="step-body">
-        <h4>Web research — up to 7 targeted searches</h4>
-        <p>The AI agent runs up to seven searches tailored to the brand and company. It looks for the website, LinkedIn, key contacts, company size, recent news, and — always — a dedicated revenue search. Every claim in the report must be cited with a source URL. No made-up data, no training knowledge used as fact.</p>
+
+    <hr>
+
+    <!-- SECTION 4: ICP SCORING -->
+    <div class="section" id="scoring">
+      <div class="eyebrow">Section 04 — ICP Scoring</div>
+      <h2>How leads are scored</h2>
+      <p>Every lead is rated across five dimensions — business fit, scale, pain points, decision maker quality, and
+        geography — using a scoring model specific to each brand. Scores total up to 110 raw points, then normalise to a
+        clean 0–100 scale. Each lead lands in one of four tiers.</p>
+
+      <div class="tier-grid">
+        <div class="tier hot">
+          <span class="tier-score">80–100</span>
+          <span class="tier-name">HOT</span>
+          <span class="tier-desc">Strong fit, clear need. Prioritise immediately.</span>
+        </div>
+        <div class="tier warm">
+          <span class="tier-score">50–79</span>
+          <span class="tier-name">WARM</span>
+          <span class="tier-desc">Decent fit, some gaps. Worth reaching out.</span>
+        </div>
+        <div class="tier cool">
+          <span class="tier-score">30–49</span>
+          <span class="tier-name">COOL</span>
+          <span class="tier-desc">Weak signals. Research runs before any decision is made.</span>
+        </div>
+        <div class="tier cold">
+          <span class="tier-score">0–29</span>
+          <span class="tier-name">COLD</span>
+          <span class="tier-desc">Poor fit. Rejected before research. Team is still notified.</span>
+        </div>
       </div>
+
+      <p>The score is calculated twice — first from form data alone (Stage 2), then revised after web research (Stage
+        3b). Research can move a score up or down by up to 20 points. A COOL lead that research confirms is a strong
+        operator will move to WARM. A lead that turns out to have overstated their scale will drop accordingly.</p>
     </div>
-    <div class="step">
-      <div class="step-num" style="background:#7c3aed;">3b</div>
-      <div class="step-body">
-        <h4>Cross-validation — score revisited against findings</h4>
-        <p>The preliminary score is revised up or down based on what research actually found. If the business type doesn't match what the form said, or the company scale is very different from what was claimed, the score adjusts accordingly. If the revised score drops below 30, the lead is rejected at this stage — but the full research is included in the rejection notification so the team can see what was found.</p>
+
+    <hr>
+
+    <!-- SECTION 5: OUTPUT -->
+    <div class="section" id="output">
+      <div class="eyebrow">Section 05 — Telegram Output</div>
+      <h2>What the sales team receives</h2>
+      <p>Every lead — regardless of outcome — generates a Telegram notification. Nothing is ever silently dropped. The
+        format depends on what the pipeline found.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Notification</th>
+              <th>When it fires</th>
+              <th>What's included</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge red">LEAD FLAGGED</span></td>
+              <td>Spam, incomplete, or competitor domain</td>
+              <td>Lead details and reason for flagging</td>
+            </tr>
+            <tr>
+              <td><span class="badge amber">DUPLICATE</span></td>
+              <td>Email already in database</td>
+              <td>New submission details + the original lead's full report, so the team has full context</td>
+            </tr>
+            <tr>
+              <td><span class="badge gray">REJECTED — COLD</span></td>
+              <td>ICP score below 30</td>
+              <td>Score breakdown and rejection reason</td>
+            </tr>
+            <tr>
+              <td><span class="badge gray">REJECTED (POST-RESEARCH)</span></td>
+              <td>Score drops below 30 after research</td>
+              <td>All research findings included — team can see what was found even on rejected leads</td>
+            </tr>
+            <tr>
+              <td><span class="badge green">NEW LEAD #{id}</span></td>
+              <td>Lead cleared all checks</td>
+              <td>Full report — see example below</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </div>
-    <div class="step">
-      <div class="step-num" style="background:#059669;">4</div>
-      <div class="step-body">
-        <h4>Deliver — full briefing sent to Telegram</h4>
-        <p>The complete lead report is sent to the sales team channel. It includes the ICP score with full reasoning, company research with source links, key contacts, a revenue estimate, and brand-specific sales enablement — a personalised icebreaker, a hypothesised pain point, and a pitch angle. The team has everything they need to open a strong first conversation.</p>
-      </div>
-    </div>
-  </div>
 
-  <div class="callout info">
-    <strong>Company name inference</strong>
-    If a lead doesn't provide a company name but uses a business email domain, the system infers the company name from the domain — e.g. <code>info@freshmill.co.ke</code> becomes <strong>Fresh Mill</strong>. Personal email with no company → treated as an individual operator (B2C).
-  </div>
-</div>
-
-<hr>
-
-<!-- SECTION 4: ICP SCORING -->
-<div class="section" id="scoring">
-  <div class="eyebrow">Section 04 — ICP Scoring</div>
-  <h2>How leads are scored</h2>
-  <p>Every lead is rated across five dimensions — business fit, scale, pain points, decision maker quality, and geography — using a scoring model specific to each brand. Scores total up to 110 raw points, then normalise to a clean 0–100 scale. Each lead lands in one of four tiers.</p>
-
-  <div class="tier-grid">
-    <div class="tier hot">
-      <span class="tier-score">80–100</span>
-      <span class="tier-name">HOT</span>
-      <span class="tier-desc">Strong fit, clear need. Prioritise immediately.</span>
-    </div>
-    <div class="tier warm">
-      <span class="tier-score">50–79</span>
-      <span class="tier-name">WARM</span>
-      <span class="tier-desc">Decent fit, some gaps. Worth reaching out.</span>
-    </div>
-    <div class="tier cool">
-      <span class="tier-score">30–49</span>
-      <span class="tier-name">COOL</span>
-      <span class="tier-desc">Weak signals. Research runs before any decision is made.</span>
-    </div>
-    <div class="tier cold">
-      <span class="tier-score">0–29</span>
-      <span class="tier-name">COLD</span>
-      <span class="tier-desc">Poor fit. Rejected before research. Team is still notified.</span>
-    </div>
-  </div>
-
-  <p>The score is calculated twice — first from form data alone (Stage 2), then revised after web research (Stage 3b). Research can move a score up or down by up to 20 points. A COOL lead that research confirms is a strong operator will move to WARM. A lead that turns out to have overstated their scale will drop accordingly.</p>
-</div>
-
-<hr>
-
-<!-- SECTION 5: OUTPUT -->
-<div class="section" id="output">
-  <div class="eyebrow">Section 05 — Telegram Output</div>
-  <h2>What the sales team receives</h2>
-  <p>Every lead — regardless of outcome — generates a Telegram notification. Nothing is ever silently dropped. The format depends on what the pipeline found.</p>
-
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Notification</th><th>When it fires</th><th>What's included</th></tr></thead>
-      <tbody>
-        <tr><td><span class="badge red">LEAD FLAGGED</span></td><td>Spam, incomplete, or competitor domain</td><td>Lead details and reason for flagging</td></tr>
-        <tr><td><span class="badge amber">DUPLICATE</span></td><td>Email already in database</td><td>New submission details + the original lead's full report, so the team has full context</td></tr>
-        <tr><td><span class="badge gray">REJECTED — COLD</span></td><td>ICP score below 30</td><td>Score breakdown and rejection reason</td></tr>
-        <tr><td><span class="badge gray">REJECTED (POST-RESEARCH)</span></td><td>Score drops below 30 after research</td><td>All research findings included — team can see what was found even on rejected leads</td></tr>
-        <tr><td><span class="badge green">NEW LEAD #{id}</span></td><td>Lead cleared all checks</td><td>Full report — see example below</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>What a full lead report looks like</h3>
-  <div class="tg-wrap">
-    <div class="tg-bubble">
-      <pre><span style="color:#64b5f6;font-weight:600;">NEW LEAD #169</span>
+      <h3>What a full lead report looks like</h3>
+      <div class="tg-wrap">
+        <div class="tg-bubble">
+          <pre><span style="color:#64b5f6;font-weight:600;">NEW LEAD #169</span>
 <span style="color:#81c784;">Source: Trakop</span>
 
 Rajesh Kumar
@@ -383,47 +1011,56 @@ Sales Enablement:
 • Pitch: Lead with Subscription Management and Container
   Tracking. Given the 2024 history, frame as reactivation
   — find out what changed and why manual work is back.</pre>
+        </div>
+      </div>
     </div>
+
+    <hr>
+
+    <!-- SECTION 6: RELIABILITY -->
+    <div class="section" id="reliability">
+      <div class="eyebrow">Section 06 — Reliability</div>
+      <h2>What happens when something goes wrong</h2>
+      <p>The pipeline is designed around one principle: an imperfect notification delivered is always better than a
+        perfect report that never arrives. No failure at any stage — database error, search tool unavailable, unexpected
+        crash — is allowed to silently stop the pipeline.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-eyebrow">Database failures</div>
+          <h4>Never stop the pipeline</h4>
+          <p>If a database write fails, the data stays in memory and the pipeline moves forward. The Telegram
+            notification is sent regardless. The team always gets the report.</p>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Web search failures</div>
+          <h4>Handled per query</h4>
+          <p>If a search tool fails, a fallback tool is tried once. If both fail, that field is marked "Not found" and
+            the next query runs. Research that returns nothing is still reported honestly — the team knows the company
+            has low web presence.</p>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Unexpected errors</div>
+          <h4>Global catch-all</h4>
+          <p>If anything crashes mid-pipeline, whatever data was collected at that point is packaged and sent to
+            Telegram immediately. The team is always notified — even on a partial run.</p>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Duplicate entries</div>
+          <h4>Caught before insert</h4>
+          <p>The duplicate check always runs before any new record is created, using email address as the unique
+            identifier. If the email exists, the original record is updated and the team receives both the new
+            submission and the original report side by side.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page -->
+
+  <div class="footer">
+    Master Software Solutions · Lead Automation Platform · Internal Overview · May 2026
   </div>
-</div>
-
-<hr>
-
-<!-- SECTION 6: RELIABILITY -->
-<div class="section" id="reliability">
-  <div class="eyebrow">Section 06 — Reliability</div>
-  <h2>What happens when something goes wrong</h2>
-  <p>The pipeline is designed around one principle: an imperfect notification delivered is always better than a perfect report that never arrives. No failure at any stage — database error, search tool unavailable, unexpected crash — is allowed to silently stop the pipeline.</p>
-
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-eyebrow">Database failures</div>
-      <h4>Never stop the pipeline</h4>
-      <p>If a database write fails, the data stays in memory and the pipeline moves forward. The Telegram notification is sent regardless. The team always gets the report.</p>
-    </div>
-    <div class="card">
-      <div class="card-eyebrow">Web search failures</div>
-      <h4>Handled per query</h4>
-      <p>If a search tool fails, a fallback tool is tried once. If both fail, that field is marked "Not found" and the next query runs. Research that returns nothing is still reported honestly — the team knows the company has low web presence.</p>
-    </div>
-    <div class="card">
-      <div class="card-eyebrow">Unexpected errors</div>
-      <h4>Global catch-all</h4>
-      <p>If anything crashes mid-pipeline, whatever data was collected at that point is packaged and sent to Telegram immediately. The team is always notified — even on a partial run.</p>
-    </div>
-    <div class="card">
-      <div class="card-eyebrow">Duplicate entries</div>
-      <h4>Caught before insert</h4>
-      <p>The duplicate check always runs before any new record is created, using email address as the unique identifier. If the email exists, the original record is updated and the team receives both the new submission and the original report side by side.</p>
-    </div>
-  </div>
-</div>
-
-</div><!-- /page -->
-
-<div class="footer">
-  Master Software Solutions · Lead Automation Platform · Internal Overview · May 2026
-</div>
 
 </body>
+
 </html>
