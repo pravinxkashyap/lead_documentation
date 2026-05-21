@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trakop Lead Automation — System Explainer v2</title>
+<title>MSS Lead Automation — Complete System Documentation</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap');
-:root{--ink:#1c1b19;--ink2:#4a4845;--ink3:#888680;--bg:#faf8f5;--bg2:#f2efe9;--bg3:#e8e4dc;--border:#ddd9d0;--accent:#4F46E5;--green:#059669;--amber:#d97706;--red:#dc2626;--blue:#2563eb;}
+:root{--ink:#1c1b19;--ink2:#4a4845;--ink3:#888680;--bg:#faf8f5;--bg2:#f2efe9;--bg3:#e8e4dc;--border:#ddd9d0;--accent:#4F46E5;--green:#059669;--amber:#d97706;--red:#dc2626;--blue:#2563eb;--purple:#7c3aed;--trakop:#4F46E5;--dairy:#059669;--mss:#d97706;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px;}
 /* COVER */
@@ -14,9 +14,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line
 .cover::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:var(--accent);opacity:.1;}
 .cover::after{content:'';position:absolute;bottom:-60px;left:200px;width:300px;height:300px;border-radius:50%;background:#7c3aed;opacity:.07;}
 .cover-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#7a7875;margin-bottom:24px;}
-.cover h1{font-family:'Fraunces',serif;font-size:54px;font-weight:700;line-height:1.08;margin-bottom:20px;max-width:600px;}
+.cover h1{font-family:'Fraunces',serif;font-size:54px;font-weight:700;line-height:1.08;margin-bottom:20px;max-width:640px;}
 .cover h1 em{color:#a5b4fc;font-style:normal;}
-.cover-desc{font-size:16px;color:#9d9a96;max-width:540px;line-height:1.7;}
+.cover-desc{font-size:16px;color:#9d9a96;max-width:560px;line-height:1.7;}
+.cover-brands{margin-top:36px;display:flex;gap:16px;flex-wrap:wrap;}
+.cover-brand{padding:10px 18px;border-radius:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;font-weight:500;}
+.cover-brand.t{background:#312e81;color:#a5b4fc;}
+.cover-brand.d{background:#064e3b;color:#6ee7b7;}
+.cover-brand.m{background:#78350f;color:#fcd34d;}
 .cover-stats{margin-top:48px;display:flex;gap:40px;flex-wrap:wrap;}
 .cover-stat{border-left:2px solid #3a3835;padding-left:16px;}
 .cover-stat .val{font-family:'Fraunces',serif;font-size:28px;color:white;display:block;}
@@ -26,7 +31,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line
 .toc-bar a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);text-decoration:none;padding:14px 16px;white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;}
 .toc-bar a:hover{color:var(--accent);border-bottom-color:var(--accent);}
 /* PAGE */
-.page{max-width:900px;margin:0 auto;padding:64px 40px;}
+.page{max-width:920px;margin:0 auto;padding:64px 40px;}
 /* SECTIONS */
 .section{margin-bottom:80px;}
 .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
@@ -68,53 +73,86 @@ pre{background:#1c1b19;color:#d4d0ca;border-radius:12px;padding:24px 28px;font-f
 pre .c{color:#5a5855;}pre .s{color:#86efac;}pre .k{color:#a5b4fc;}pre .n{color:#fcd34d;}pre .v{color:#f9a8d4;}
 /* GRID CARDS */
 .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+.card-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:24px 0;}
 .card{background:white;border:1px solid var(--border);border-radius:12px;padding:22px;}
 .card .card-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;}
 .card h4{margin:0 0 8px;font-size:15px;}
 .card p{font-size:13px;color:var(--ink2);margin:0;line-height:1.6;}
-/* COMPARE */
-.compare{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:24px 0;}
-.compare-head{padding:14px 20px;font-weight:600;font-size:13px;}
-.compare-head.old{background:var(--bg3);color:var(--ink2);}
-.compare-head.new{background:var(--accent);color:white;}
-.compare-body{padding:16px 20px;}
-.compare-row{font-size:13px;color:var(--ink2);padding:7px 0;border-bottom:1px dashed var(--border);display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
-.compare-row:last-child{border:none;}
-.compare-row .icon{flex-shrink:0;margin-top:1px;}
-/* STEP LIST */
-.step-list{list-style:none;margin:20px 0;}
-.step-list li{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;}
-.step-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:white;background:var(--accent);}
-.step-content h4{margin:4px 0 4px;font-size:14px;}
-.step-content p{font-size:13px;color:var(--ink2);margin:0;}
-/* PIPELINE STAGES */
-.stage-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
-.stage-card{border-radius:12px;padding:22px;border:1px solid var(--border);background:white;}
-.stage-card .stage-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
-.stage-card h4{margin:0 0 10px;}
-.stage-card ul{list-style:none;padding:0;}
-.stage-card ul li{font-size:13px;color:var(--ink2);padding:4px 0;padding-left:16px;position:relative;line-height:1.5;}
-.stage-card ul li::before{content:'→';position:absolute;left:0;color:var(--ink3);}
+/* BRAND CARDS */
+.brand-card{border-radius:12px;padding:24px;border:1px solid var(--border);background:white;}
+.brand-card.trakop{border-top:4px solid var(--trakop);}
+.brand-card.dairy{border-top:4px solid var(--dairy);}
+.brand-card.mss{border-top:4px solid var(--mss);}
+.brand-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;}
+.brand-label.t{color:var(--trakop);}
+.brand-label.d{color:var(--dairy);}
+.brand-label.m{color:var(--mss);}
+/* PIPELINE FLOW */
+.pipeline-flow{margin:28px 0;}
+.pipe-stage{display:flex;gap:20px;align-items:flex-start;margin-bottom:8px;position:relative;}
+.pipe-stage::before{content:'';position:absolute;left:20px;top:44px;width:2px;height:calc(100% + 8px);background:var(--border);}
+.pipe-stage:last-child::before{display:none;}
+.pipe-num{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;color:white;flex-shrink:0;z-index:1;}
+.pipe-body{background:white;border:1px solid var(--border);border-radius:10px;padding:18px 20px;flex:1;margin-bottom:0;}
+.pipe-body h4{margin:0 0 6px;font-size:14px;}
+.pipe-body p{font-size:13px;color:var(--ink2);margin:0;line-height:1.55;}
+.pipe-body ul{list-style:none;padding:0;margin:8px 0 0;}
+.pipe-body ul li{font-size:13px;color:var(--ink2);padding:3px 0 3px 16px;position:relative;line-height:1.5;}
+.pipe-body ul li::before{content:'→';position:absolute;left:0;color:var(--ink3);}
 /* ICP TIERS */
 .tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0;}
 .tier{border-radius:10px;padding:18px 16px;text-align:center;border:1px solid var(--border);}
-.tier .tier-score{font-family:'Fraunces',serif;font-size:22px;font-weight:700;display:block;margin-bottom:4px;}
-.tier .tier-name{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:8px;}
+.tier .tier-score{font-family:'Fraunces',serif;font-size:24px;font-weight:700;display:block;margin-bottom:4px;}
+.tier .tier-name{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:10px;}
 .tier .tier-action{font-size:12px;color:var(--ink2);}
 .tier.hot{background:#fef2f2;border-color:#fca5a5;}.tier.hot .tier-score,.tier.hot .tier-name{color:#dc2626;}
 .tier.warm{background:#fffbeb;border-color:#fcd34d;}.tier.warm .tier-score,.tier.warm .tier-name{color:#d97706;}
-.tier.cold{background:#eff6ff;border-color:#93c5fd;}.tier.cold .tier-score,.tier.cold .tier-name{color:#2563eb;}
-.tier.rej{background:#f9fafb;border-color:#d1d5db;}.tier.rej .tier-score,.tier.rej .tier-name{color:#6b7280;}
-/* SECURITY LAYERS */
-.sec-layers{position:relative;margin:28px 0;}
+.tier.cool{background:#f0f9ff;border-color:#7dd3fc;}.tier.cool .tier-score,.tier.cool .tier-name{color:#0284c7;}
+.tier.cold{background:#f9fafb;border-color:#d1d5db;}.tier.cold .tier-score,.tier.cold .tier-name{color:#6b7280;}
+/* STEP LIST */
+.step-list{list-style:none;margin:20px 0;}
+.step-list li{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;}
+.step-num{flex-shrink:0;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;color:white;background:var(--accent);}
+.step-content h4{margin:4px 0 4px;font-size:14px;}
+.step-content p{font-size:13px;color:var(--ink2);margin:0;}
+/* TELEGRAM PREVIEW */
+.telegram-preview{background:#17212b;border-radius:14px;padding:28px;margin:24px 0;font-family:'DM Sans',sans-serif;}
+.tg-bubble{background:#212d3b;border-radius:12px;padding:18px 20px;max-width:500px;color:#e8e8e8;font-size:13px;line-height:1.7;}
+.tg-bubble .tg-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5d8aaa;margin-bottom:10px;}
+.tg-bubble pre{background:transparent;color:#e8e8e8;padding:0;margin:0;font-size:12px;line-height:1.75;white-space:pre-wrap;border-radius:0;}
+.tg-bubble .tg-bold{color:white;font-weight:600;}
+.tg-bubble .tg-dim{color:#8a9ab0;}
+/* RULE LIST */
+.rule-list{list-style:none;margin:20px 0;counter-reset:rules;}
+.rule-list li{counter-increment:rules;display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--ink2);}
+.rule-list li:last-child{border-bottom:none;}
+.rule-list li::before{content:counter(rules,'decimal-leading-zero');font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3);flex-shrink:0;padding-top:2px;min-width:24px;}
+.rule-list strong{color:var(--ink);}
+/* DB FIELD GROUPS */
+.field-group{margin:20px 0;}
+.field-group-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+/* QUERY BLOCK */
+.query-block{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:16px 0;}
+.query-block .qb-head{background:var(--bg2);padding:10px 16px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);}
+.query-block .qb-body{padding:12px 16px;}
+.query-block .qb-body .q{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink);padding:5px 0;border-bottom:1px dashed var(--border);}
+.query-block .qb-body .q:last-child{border:none;}
+.query-block .qb-body .q .qn{color:var(--accent);margin-right:8px;}
+.query-block .qb-body .q .special{color:var(--green);font-weight:500;}
 /* HR */
 hr{border:none;border-top:1px solid var(--border);margin:56px 0;}
+/* COMPARE */
+.compare{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:24px 0;}
+.compare-head{padding:14px 20px;font-weight:600;font-size:13px;text-align:center;}
+.compare-body{padding:16px 20px;}
+.compare-row{font-size:13px;color:var(--ink2);padding:7px 0;border-bottom:1px dashed var(--border);line-height:1.5;}
+.compare-row:last-child{border:none;}
 /* FOOTER */
 .footer{background:var(--ink);color:#5a5855;text-align:center;padding:36px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;}
 @media(max-width:640px){
-  .cover{padding:40px 24px 32px;}.cover h1{font-size:36px;}
+  .cover{padding:40px 24px 32px;}.cover h1{font-size:34px;}
   .page{padding:40px 20px;}
-  .card-grid,.stage-row,.tier-grid,.compare{grid-template-columns:1fr;}
+  .card-grid,.card-grid-3,.tier-grid,.compare{grid-template-columns:1fr;}
   .toc-bar{padding:0 20px;}
 }
 </style>
@@ -123,27 +161,36 @@ hr{border:none;border-top:1px solid var(--border);margin:56px 0;}
 
 <!-- COVER -->
 <div class="cover">
-  <div class="cover-eyebrow">Trakop · Master Software Solutions · Internal Technical Documentation · v2.0</div>
-  <h1>Lead Automation<br><em>System Explainer</em></h1>
-  <p class="cover-desc">A complete plain-language guide to how the system works — from the moment a prospect submits a form anywhere in the world to the second the sales team gets a briefing on Telegram. Written for both technical and non-technical readers.</p>
+  <div class="cover-eyebrow">Master Software Solutions · Internal System Documentation · May 2026</div>
+  <h1>Lead Automation<br><em>Platform — Full Documentation</em></h1>
+  <p class="cover-desc">Complete technical and operational reference for the MSS intelligent lead pipeline — from the moment a prospect submits a form on any brand's website to the second the sales team receives a fully researched briefing on Telegram.</p>
+  <div class="cover-brands">
+    <div class="cover-brand t">Trakop — Delivery SaaS</div>
+    <div class="cover-brand d">DairyTech.ai — Dairy ERP</div>
+    <div class="cover-brand m">Master Software Solutions — Custom Dev</div>
+  </div>
   <div class="cover-stats">
-    <div class="cover-stat"><span class="val">4</span><span class="lbl">Pipeline stages</span></div>
-    <div class="cover-stat"><span class="val">8</span><span class="lbl">System components</span></div>
+    <div class="cover-stat"><span class="val">3</span><span class="lbl">Brands covered</span></div>
+    <div class="cover-stat"><span class="val">5</span><span class="lbl">Pipeline stages</span></div>
+    <div class="cover-stat"><span class="val">7</span><span class="lbl">Web searches / lead</span></div>
     <div class="cover-stat"><span class="val">~3 min</span><span class="lbl">Form to Telegram</span></div>
-    <div class="cover-stat"><span class="val">$0</span><span class="lbl">Infrastructure cost</span></div>
+    <div class="cover-stat"><span class="val">19</span><span class="lbl">Absolute rules</span></div>
   </div>
 </div>
 
 <!-- NAV -->
 <nav class="toc-bar">
   <a href="#overview">Overview</a>
+  <a href="#brands">Brands</a>
   <a href="#architecture">Architecture</a>
-  <a href="#components">Components</a>
-  <a href="#dataflow">Data flow</a>
-  <a href="#pipeline">AI pipeline</a>
-  <a href="#security">Security</a>
-  <a href="#production">Production</a>
-  <a href="#monitoring">Monitoring</a>
+  <a href="#source">Source Detection</a>
+  <a href="#pipeline">Pipeline Stages</a>
+  <a href="#icp">ICP Scoring</a>
+  <a href="#research">Web Research</a>
+  <a href="#database">Database</a>
+  <a href="#telegram">Telegram Output</a>
+  <a href="#errors">Error Handling</a>
+  <a href="#rules">Absolute Rules</a>
 </nav>
 
 <div class="page">
@@ -153,417 +200,343 @@ hr{border:none;border-top:1px solid var(--border);margin:56px 0;}
   <div class="eyebrow">Section 01 — Overview</div>
   <h2>What this system does</h2>
 
-  <p>Before this system existed, someone at Trakop had to manually check every enquiry form — look up who the company is, judge their size, decide if they are a real prospect — and then write a summary to pass to the sales team. That process was slow, inconsistent, and easy to miss.</p>
+  <p>MSS runs three separate brands — Trakop, DairyTech.ai, and Master Software Solutions — each with its own contact form, its own ideal customer profile, and its own sales pitch. Before this system existed, every inbound form submission had to be handled manually: someone would check who submitted it, look up the company online, decide if it was worth following up, and then write a summary for the sales team. That process was slow, inconsistent, and easy to miss — especially across three brands.</p>
 
-  <p>This system automates the entire thing. The moment a prospect anywhere in the world submits the form, an AI agent wakes up, validates the lead, researches the company on the internet, scores how good a fit they are, and sends the sales team a complete, ready-to-act briefing on Telegram. Zero human involvement. Done in about three minutes.</p>
+  <p>This system replaces that entire process. The moment a prospect submits any form, an AI agent wakes up automatically, identifies which brand the lead came from, validates the submission, scores the lead against a 100-point Ideal Customer Profile, researches the company across the web with up to seven targeted searches, and sends the sales team a complete, ready-to-act briefing on Telegram. Zero human involvement required. Done in about three minutes.</p>
 
   <div class="callout success">
     <strong>One-sentence summary</strong>
-    A prospect fills the form → the system automatically validates, researches, scores, and delivers a lead report to the sales team on Telegram.
+    A prospect fills any form → the system automatically detects the brand, validates, researches, scores, and delivers a full lead report to the sales team on Telegram.
   </div>
 
   <div class="diagram-wrap">
-    <svg width="100%" viewBox="0 0 680 130" role="img">
-      <title>Five-step pipeline summary</title>
-      <desc>Form submission through validate, score, research, to Telegram delivery</desc>
+    <svg width="100%" viewBox="0 0 760 110" role="img">
+      <title>Pipeline summary — six steps</title>
       <defs><marker id="a0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-      <!-- boxes -->
-      <rect x="8" y="40" width="112" height="52" rx="8" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#3730a3" x="64" y="60" text-anchor="middle" dominant-baseline="central">Form</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#6366f1" x="64" y="78" text-anchor="middle" dominant-baseline="central">submitted</text>
-      <line x1="122" y1="66" x2="146" y2="66" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
-      <rect x="148" y="40" width="112" height="52" rx="8" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#3730a3" x="204" y="60" text-anchor="middle" dominant-baseline="central">Validate</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#6366f1" x="204" y="78" text-anchor="middle" dominant-baseline="central">spam · dupes</text>
-      <line x1="262" y1="66" x2="286" y2="66" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
-      <rect x="288" y="40" width="112" height="52" rx="8" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#3730a3" x="344" y="60" text-anchor="middle" dominant-baseline="central">ICP Score</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#6366f1" x="344" y="78" text-anchor="middle" dominant-baseline="central">0–100 rating</text>
-      <line x1="402" y1="66" x2="426" y2="66" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
-      <rect x="428" y="40" width="112" height="52" rx="8" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#3730a3" x="484" y="60" text-anchor="middle" dominant-baseline="central">Research</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#6366f1" x="484" y="78" text-anchor="middle" dominant-baseline="central">web search</text>
-      <line x1="542" y1="66" x2="566" y2="66" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
-      <rect x="568" y="40" width="104" height="52" rx="8" fill="#1c1b19" stroke="#1c1b19"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="white" x="620" y="60" text-anchor="middle" dominant-baseline="central">Telegram</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#9d9a96" x="620" y="78" text-anchor="middle" dominant-baseline="central">sales briefing</text>
+      <rect x="4" y="34" width="100" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="54" y="50" text-anchor="middle" dominant-baseline="central">Form</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="54" y="67" text-anchor="middle" dominant-baseline="central">3 brands</text>
+      <line x1="106" y1="56" x2="122" y2="56" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
+      <rect x="124" y="34" width="108" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="178" y="50" text-anchor="middle" dominant-baseline="central">Detect Source</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="178" y="67" text-anchor="middle" dominant-baseline="central">trakop/dairy/mss</text>
+      <line x1="234" y1="56" x2="250" y2="56" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
+      <rect x="252" y="34" width="108" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="306" y="50" text-anchor="middle" dominant-baseline="central">Validate</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="306" y="67" text-anchor="middle" dominant-baseline="central">spam · dupes · rival</text>
+      <line x1="362" y1="56" x2="378" y2="56" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
+      <rect x="380" y="34" width="108" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="434" y="50" text-anchor="middle" dominant-baseline="central">ICP Score</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="434" y="67" text-anchor="middle" dominant-baseline="central">0–100 per brand</text>
+      <line x1="490" y1="56" x2="506" y2="56" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
+      <rect x="508" y="34" width="108" height="44" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="562" y="50" text-anchor="middle" dominant-baseline="central">Web Research</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="562" y="67" text-anchor="middle" dominant-baseline="central">7 searches</text>
+      <line x1="618" y1="56" x2="634" y2="56" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a0)"/>
+      <rect x="636" y="34" width="108" height="44" rx="7" fill="#1c1b19" stroke="#1c1b19"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="white" x="690" y="50" text-anchor="middle" dominant-baseline="central">Telegram</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#9d9a96" x="690" y="67" text-anchor="middle" dominant-baseline="central">sales briefing</text>
     </svg>
-    <div class="diagram-cap">Fig 1.1 — Five steps from form submission to sales team notification</div>
+    <div class="diagram-cap">Fig 1.1 — End-to-end flow across all three brands</div>
   </div>
 
-  <h3>Who uses this system</h3>
+  <h3>Who interacts with this system</h3>
   <div class="card-grid">
-    <div class="card">
-      <div class="card-eyebrow">Sales team</div>
-      <h4>Receive ready-to-act briefings</h4>
-      <p>Gets a Telegram message for every lead. No manual lookup needed. The message includes the company's website, key contacts, ICP score, recommended action, and a personalised icebreaker for the first call.</p>
-    </div>
     <div class="card">
       <div class="card-eyebrow">Prospects</div>
       <h4>Fill the enquiry form</h4>
-      <p>Visit the form (hosted on GitHub Pages, accessible anywhere), fill in their details and business requirements, and submit. They see a confirmation immediately. The pipeline runs silently in the background.</p>
+      <p>Visit any of the three brand forms, fill in their details, and submit. They see a confirmation. The pipeline runs entirely silently in the background — prospects never know it exists.</p>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow">Sales team</div>
+      <h4>Receive ready-to-act briefings</h4>
+      <p>Gets a Telegram message for every single lead — flagged, rejected, or full report. Never needs to manually look anything up. The message includes ICP score, company research, contacts, personalised icebreakers, and pitch strategy.</p>
     </div>
   </div>
 </div>
 
 <hr>
 
-<!-- ─── SECTION 2: ARCHITECTURE ─── -->
-<div class="section" id="architecture">
-  <div class="eyebrow">Section 02 — Architecture</div>
-  <h2>How the system is built — old vs new</h2>
+<!-- ─── SECTION 2: BRANDS ─── -->
+<div class="section" id="brands">
+  <div class="eyebrow">Section 02 — Brands</div>
+  <h2>Three brands, one pipeline</h2>
 
-  <p>The system started as a fully local setup — everything ran on one Mac Mini and could only be tested from that machine. It has now evolved so that anyone on the internet can submit the form, and the pipeline runs automatically. Here is what changed and why.</p>
+  <p>Each brand targets a different customer type, uses different form fields, and is scored against a different Ideal Customer Profile. The pipeline detects which brand a lead came from and automatically applies the right ICP scoring model, web search queries, and sales pitch strategy. Nothing manual — the routing is fully automatic.</p>
 
-  <div class="compare">
-    <div>
-      <div class="compare-head old">Before — Local only (v1)</div>
-      <div class="compare-body">
-        <div class="compare-row"><span class="icon">📄</span>HTML form served from Mac Mini, only accessible at localhost</div>
-        <div class="compare-row"><span class="icon">🔒</span>Nothing on the internet could reach it</div>
-        <div class="compare-row"><span class="icon">🖥️</span>Had to be tested sitting at the Mac Mini</div>
-        <div class="compare-row"><span class="icon">⚡</span>server.js on port 8080 → OpenClaw port 18789</div>
-        <div class="compare-row"><span class="icon">❌</span>Real HubSpot integration impossible</div>
-      </div>
+  <div class="card-grid-3" style="margin-top:24px;">
+    <div class="brand-card trakop">
+      <div class="brand-label t">Trakop</div>
+      <h4 style="margin:8px 0 10px;">Delivery Scheduling SaaS</h4>
+      <p style="font-size:13px;color:var(--ink2);margin-bottom:12px;">Route management, subscription billing, driver tracking, and container return tracking for businesses that run their own recurring delivery fleet.</p>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3);margin-bottom:6px;">Sweet spot</div>
+      <p style="font-size:12px;color:var(--ink2);margin:0;">50–2,000 customers or 20–1,000 orders/day. Dairy, water, meals, groceries, pharmacy, laundry, and similar recurring delivery businesses.</p>
     </div>
-    <div>
-      <div class="compare-head new">Now — Internet accessible (v2)</div>
-      <div class="compare-body">
-        <div class="compare-row"><span class="icon">🌐</span>Form hosted on GitHub Pages — public URL, works on any device</div>
-        <div class="compare-row"><span class="icon">🚇</span>Cloudflare Tunnel bridges internet → Mac Mini securely</div>
-        <div class="compare-row"><span class="icon">📱</span>Can be tested from phone, another laptop, anywhere</div>
-        <div class="compare-row"><span class="icon">⚡</span>Same server.js and OpenClaw — zero changes to pipeline</div>
-        <div class="compare-row"><span class="icon">✅</span>Ready to connect real HubSpot workflow</div>
-      </div>
+    <div class="brand-card dairy">
+      <div class="brand-label d">DairyTech.ai</div>
+      <h4 style="margin:8px 0 10px;">AI-Driven Dairy ERP</h4>
+      <p style="font-size:13px;color:var(--ink2);margin-bottom:12px;">Full dairy supply chain — milk procurement, farmer payments, batch production, quality control, cold chain, van sales, driver POS, and analytics.</p>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3);margin-bottom:6px;">Sweet spot</div>
+      <p style="font-size:12px;color:var(--ink2);margin:0;">Dairy manufacturers, distributors, and cooperatives of any size that need integrated procurement-to-delivery operations. 100+ brands served.</p>
+    </div>
+    <div class="brand-card mss">
+      <div class="brand-label m">Master Software Solutions</div>
+      <h4 style="margin:8px 0 10px;">Custom Software & Digital Transformation</h4>
+      <p style="font-size:13px;color:var(--ink2);margin-bottom:12px;">ERP, CRM, AI agents, custom application development, and digital transformation. 12+ years, 90+ professionals, 800+ clients in 40+ countries.</p>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3);margin-bottom:6px;">Sweet spot</div>
+      <p style="font-size:12px;color:var(--ink2);margin:0;">Mid-to-enterprise businesses needing a custom software partner — automation, ERP/CRM implementation, AI integration, or full digital transformation.</p>
     </div>
   </div>
 
-  <h3>The complete architecture — every component in one picture</h3>
-
-  <div class="diagram-wrap">
-    <svg width="100%" viewBox="0 0 680 520" role="img">
-      <title>Complete system architecture</title>
-      <desc>Two zones: internet/public zone and Mac Mini local zone, showing data flow between all components</desc>
-      <defs><marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-
-      <!-- INTERNET ZONE -->
-      <rect x="16" y="16" width="430" height="196" rx="14" fill="#f0f4ff" stroke="#4F46E5" stroke-width="1" stroke-dasharray="7 4"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="10" fill="#6366f1" x="30" y="36" letter-spacing="0.12em">INTERNET — PUBLIC ZONE</text>
-
-      <!-- Prospect -->
-      <rect x="36" y="52" width="148" height="60" rx="8" fill="white" stroke="#c7d2fe" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="110" y="75" text-anchor="middle" dominant-baseline="central">Prospect</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="110" y="93" text-anchor="middle" dominant-baseline="central">anywhere in the world</text>
-
-      <!-- GitHub Pages form -->
-      <rect x="36" y="138" width="148" height="60" rx="8" fill="white" stroke="#4F46E5" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="110" y="161" text-anchor="middle" dominant-baseline="central">GitHub Pages</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="110" y="179" text-anchor="middle" dominant-baseline="central">HTML form (public URL)</text>
-      <line x1="110" y1="113" x2="110" y2="136" stroke="#6366f1" stroke-width="1.2" marker-end="url(#a1)"/>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="122" y="127" dominant-baseline="central">fills form</text>
-
-      <!-- Cloudflare Tunnel -->
-      <rect x="266" y="95" width="158" height="76" rx="8" fill="white" stroke="#ea580c" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="345" y="121" text-anchor="middle" dominant-baseline="central">Cloudflare Tunnel</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="345" y="139" text-anchor="middle" dominant-baseline="central">xyz.trycloudflare.com</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#ea580c" x="345" y="157" text-anchor="middle" dominant-baseline="central">/submit</text>
-
-      <!-- Arrow: form → tunnel -->
-      <line x1="186" y1="168" x2="264" y2="140" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a1)"/>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="225" y="148" text-anchor="middle">POST JSON</text>
-
-      <!-- MAC MINI ZONE -->
-      <rect x="16" y="232" width="430" height="272" rx="14" fill="#f0fdf4" stroke="#059669" stroke-width="1" stroke-dasharray="7 4"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="10" fill="#15803d" x="30" y="250" letter-spacing="0.12em">MAC MINI — LOCAL ZONE (never exposed to internet)</text>
-
-      <!-- server.js -->
-      <rect x="36" y="264" width="148" height="68" rx="8" fill="white" stroke="#059669" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="110" y="289" text-anchor="middle" dominant-baseline="central">server.js proxy</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="110" y="307" text-anchor="middle" dominant-baseline="central">localhost:8080</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#15803d" x="110" y="324" text-anchor="middle" dominant-baseline="central">token check + normalise</text>
-
-      <!-- OpenClaw -->
-      <rect x="266" y="264" width="158" height="68" rx="8" fill="white" stroke="#059669" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="345" y="289" text-anchor="middle" dominant-baseline="central">OpenClaw gateway</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="345" y="307" text-anchor="middle" dominant-baseline="central">localhost:18789</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#15803d" x="345" y="324" text-anchor="middle" dominant-baseline="central">runs as macOS daemon</text>
-
-      <!-- AI Agent -->
-      <rect x="36" y="368" width="148" height="68" rx="8" fill="#fafaf9" stroke="#ddd9d0" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="110" y="393" text-anchor="middle" dominant-baseline="central">AI Agent (GLM)</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="110" y="411" text-anchor="middle" dominant-baseline="central">4-stage pipeline</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="110" y="428" text-anchor="middle" dominant-baseline="central">isolated per lead</text>
-
-      <!-- SQLite DB -->
-      <rect x="266" y="368" width="158" height="68" rx="8" fill="#fafaf9" stroke="#ddd9d0" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="345" y="393" text-anchor="middle" dominant-baseline="central">SQLite database</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="345" y="411" text-anchor="middle" dominant-baseline="central">leads.db — local file</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="345" y="428" text-anchor="middle" dominant-baseline="central">full audit log</text>
-
-      <!-- Arrows inside mac mini -->
-      <line x1="186" y1="298" x2="264" y2="298" stroke="#059669" stroke-width="1.2" marker-end="url(#a1)"/>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#15803d" x="225" y="290" text-anchor="middle">webhook</text>
-      <line x1="345" y1="333" x2="345" y2="366" stroke="#059669" stroke-width="1.2" marker-end="url(#a1)"/>
-      <line x1="110" y1="333" x2="110" y2="366" stroke="#059669" stroke-width="1.2" marker-end="url(#a1)"/>
-      <line x1="186" y1="400" x2="264" y2="400" stroke="#ddd9d0" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a1)"/>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="225" y="392" text-anchor="middle">db.js</text>
-
-      <!-- Cloudflare → server.js bridge (vertical dashed) -->
-      <path d="M 345 212 L 345 244 L 110 244 L 110 262" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#a1)"/>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#ea580c" x="230" y="237" text-anchor="middle">encrypted tunnel</text>
-
-      <!-- TELEGRAM (external right) -->
-      <rect x="480" y="368" width="184" height="68" rx="8" fill="#1c1b19" stroke="#1c1b19"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="white" x="572" y="393" text-anchor="middle" dominant-baseline="central">Telegram</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#9d9a96" x="572" y="411" text-anchor="middle" dominant-baseline="central">sales team chat</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#7a7875" x="572" y="428" text-anchor="middle" dominant-baseline="central">external cloud service</text>
-
-      <!-- AI agent → Telegram -->
-      <path d="M 186 402 L 460 402 L 460 402 L 478 402" fill="none" stroke="#4F46E5" stroke-width="1.5" marker-end="url(#a1)"/>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="400" y="394" text-anchor="middle">lead report</text>
-
-      <!-- Web search label -->
-      <rect x="480" y="264" width="184" height="68" rx="8" fill="#fafaf9" stroke="#ddd9d0" stroke-width="0.8"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="572" y="289" text-anchor="middle" dominant-baseline="central">z.ai / GLM API</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="572" y="307" text-anchor="middle" dominant-baseline="central">AI model (external)</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="572" y="324" text-anchor="middle" dominant-baseline="central">web search tools</text>
-      <line x1="424" y1="298" x2="478" y2="298" stroke="#ddd9d0" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a1)"/>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="450" y="290" text-anchor="middle">API call</text>
-    </svg>
-    <div class="diagram-cap">Fig 2.1 — Full architecture. Left side = public internet. Bottom green zone = Mac Mini (private, never exposed directly).</div>
-  </div>
-
-  <div class="callout info">
-    <strong>Key design principle — the Mac Mini is never directly exposed</strong>
-    The Cloudflare Tunnel is a one-way pipe. It lets traffic in from the internet, but the Mac Mini never "opens a port" to the outside world. Think of it like a secure post box — people can drop letters in, but no one from the street can reach inside.
-  </div>
-</div>
-
-<hr>
-
-<!-- ─── SECTION 3: COMPONENTS ─── -->
-<div class="section" id="components">
-  <div class="eyebrow">Section 03 — Components</div>
-  <h2>Every component explained</h2>
-  <p>Think of the system as a small office with different people at different desks. Each one has exactly one job. Here is every desk, what it does, and why it needs to exist.</p>
-
+  <h3>Form fields per brand</h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Component</th><th>Where it lives</th><th>Plain-language job</th><th>Status</th></tr></thead>
+      <thead><tr><th>Field</th><th>Trakop</th><th>DairyTech.ai</th><th>MSS</th></tr></thead>
+      <tbody>
+        <tr><td><code>first_name</code> / <code>name</code></td><td><span class="badge green">Required</span></td><td><span class="badge green">Required</span> (split from <code>name</code>)</td><td><span class="badge green">Required</span> (split from <code>name</code>)</td></tr>
+        <tr><td><code>email</code></td><td><span class="badge green">Required</span></td><td><span class="badge green">Required</span></td><td><span class="badge green">Required</span></td></tr>
+        <tr><td><code>requirements</code> / <code>message</code></td><td><span class="badge green">Required</span></td><td><span class="badge green">Required</span></td><td><span class="badge green">Required</span> (mapped from <code>message</code>)</td></tr>
+        <tr><td><code>business_type</code></td><td><span class="badge green">Required</span> (dropdown)</td><td>—</td><td>Inferred from message</td></tr>
+        <tr><td><code>business_domain</code></td><td>—</td><td><span class="badge green">Required</span> (multi-select)</td><td>—</td></tr>
+        <tr><td><code>company_name</code></td><td><span class="badge gray">Optional</span></td><td><span class="badge green">Required</span></td><td><span class="badge gray">Optional</span> (also <code>business_name</code>)</td></tr>
+        <tr><td><code>orders_per_day</code></td><td><span class="badge gray">Optional</span></td><td>—</td><td>—</td></tr>
+        <tr><td><code>customers_served</code></td><td><span class="badge gray">Optional</span></td><td>—</td><td>—</td></tr>
+        <tr><td><code>phone_number</code></td><td><span class="badge gray">Optional</span></td><td><span class="badge gray">Optional</span></td><td><span class="badge gray">Optional</span></td></tr>
+        <tr><td><code>country</code></td><td><span class="badge gray">Optional</span></td><td><span class="badge gray">Optional</span></td><td><span class="badge gray">Optional</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- ─── SECTION 3: ARCHITECTURE ─── -->
+<div class="section" id="architecture">
+  <div class="eyebrow">Section 03 — Architecture</div>
+  <h2>System architecture &amp; components</h2>
+  <p>The system is built on a small set of components — each with a single, well-defined job. A form submission travels through all of them in sequence before reaching the sales team.</p>
+
+  <div class="diagram-wrap">
+    <svg width="100%" viewBox="0 0 700 460" role="img">
+      <title>Full system architecture</title>
+      <defs><marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <!-- Internet zone -->
+      <rect x="14" y="14" width="420" height="176" rx="12" fill="#f0f4ff" stroke="#4F46E5" stroke-width="1" stroke-dasharray="7 4"/>
+      <text font-family="IBM Plex Mono,monospace" font-size="9" fill="#6366f1" x="28" y="32" letter-spacing="0.12em">INTERNET — PUBLIC ZONE</text>
+      <!-- Prospect -->
+      <rect x="32" y="46" width="136" height="52" rx="8" fill="white" stroke="#c7d2fe" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#1c1b19" x="100" y="65" text-anchor="middle" dominant-baseline="central">Prospect</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="100" y="82" text-anchor="middle" dominant-baseline="central">any brand's form</text>
+      <!-- Forms -->
+      <rect x="32" y="122" width="136" height="52" rx="8" fill="white" stroke="#4F46E5" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#1c1b19" x="100" y="141" text-anchor="middle" dominant-baseline="central">Brand Forms</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="100" y="158" text-anchor="middle" dominant-baseline="central">Trakop / DairyTech / MSS</text>
+      <line x1="100" y1="99" x2="100" y2="120" stroke="#6366f1" stroke-width="1.2" marker-end="url(#a1)"/>
+      <!-- Tunnel -->
+      <rect x="252" y="80" width="164" height="60" rx="8" fill="white" stroke="#ea580c" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#1c1b19" x="334" y="100" text-anchor="middle" dominant-baseline="central">Cloudflare Tunnel</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#ea580c" x="334" y="117" text-anchor="middle" dominant-baseline="central">public HTTPS endpoint</text>
+      <line x1="170" y1="150" x2="250" y2="120" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a1)"/>
+      <!-- Mac Mini zone -->
+      <rect x="14" y="210" width="420" height="236" rx="12" fill="#f0fdf4" stroke="#059669" stroke-width="1" stroke-dasharray="7 4"/>
+      <text font-family="IBM Plex Mono,monospace" font-size="9" fill="#15803d" x="28" y="228" letter-spacing="0.12em">MAC MINI — LOCAL ZONE (never directly exposed)</text>
+      <!-- server.js -->
+      <rect x="32" y="244" width="148" height="60" rx="8" fill="white" stroke="#059669" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#1c1b19" x="106" y="264" text-anchor="middle" dominant-baseline="central">server.js proxy</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="106" y="281" text-anchor="middle" dominant-baseline="central">port 8080 · token check</text>
+      <!-- OpenClaw -->
+      <rect x="256" y="244" width="160" height="60" rx="8" fill="white" stroke="#059669" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#1c1b19" x="336" y="264" text-anchor="middle" dominant-baseline="central">OpenClaw gateway</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="336" y="281" text-anchor="middle" dominant-baseline="central">port 18789 · boot daemon</text>
+      <!-- AI Agent -->
+      <rect x="32" y="336" width="148" height="60" rx="8" fill="#fafaf9" stroke="#ddd9d0" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#1c1b19" x="106" y="356" text-anchor="middle" dominant-baseline="central">AI Agent (Claude)</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="106" y="373" text-anchor="middle" dominant-baseline="central">reads LEAD_PIPELINE.md</text>
+      <!-- SQLite -->
+      <rect x="256" y="336" width="160" height="60" rx="8" fill="#fafaf9" stroke="#ddd9d0" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#1c1b19" x="336" y="356" text-anchor="middle" dominant-baseline="central">SQLite (leads.db)</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="336" y="373" text-anchor="middle" dominant-baseline="central">via db.js CLI script</text>
+      <!-- Tunnel → server.js -->
+      <path d="M 334 142 L 334 224 L 106 224 L 106 242" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#a1)"/>
+      <text font-family="DM Sans,sans-serif" font-size="9" fill="#ea580c" x="220" y="218" text-anchor="middle">encrypted tunnel</text>
+      <!-- server → openclaw -->
+      <line x1="182" y1="274" x2="254" y2="274" stroke="#059669" stroke-width="1.2" marker-end="url(#a1)"/>
+      <text font-family="DM Sans,sans-serif" font-size="9" fill="#15803d" x="218" y="267" text-anchor="middle">webhook POST</text>
+      <!-- openclaw → agent -->
+      <line x1="336" y1="306" x2="336" y2="334" stroke="#059669" stroke-width="1.2" marker-end="url(#a1)"/>
+      <line x1="106" y1="306" x2="106" y2="334" stroke="#059669" stroke-width="1.2" marker-end="url(#a1)"/>
+      <!-- agent → sqlite -->
+      <line x1="182" y1="366" x2="254" y2="366" stroke="#ddd9d0" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a1)"/>
+      <text font-family="DM Sans,sans-serif" font-size="9" fill="#888680" x="218" y="358" text-anchor="middle">db.js commands</text>
+      <!-- Telegram external -->
+      <rect x="468" y="336" width="210" height="60" rx="8" fill="#1c1b19" stroke="#1c1b19"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="white" x="573" y="356" text-anchor="middle" dominant-baseline="central">Telegram</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#9d9a96" x="573" y="373" text-anchor="middle" dominant-baseline="central">sales team group chat</text>
+      <line x1="182" y1="366" x2="182" y2="406" stroke="#4F46E5" stroke-width="1.5" marker-end="url(#a1)"/>
+      <path d="M 182 406 L 467 406 L 467 366" fill="none" stroke="#4F46E5" stroke-width="1.5" marker-end="url(#a1)"/>
+      <text font-family="DM Sans,sans-serif" font-size="9" fill="#6366f1" x="380" y="416" text-anchor="middle">lead report</text>
+      <!-- Web search external -->
+      <rect x="468" y="244" width="210" height="60" rx="8" fill="#fafaf9" stroke="#ddd9d0" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#1c1b19" x="573" y="264" text-anchor="middle" dominant-baseline="central">Web Search Tools</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="573" y="281" text-anchor="middle" dominant-baseline="central">SearXNG · DDG · web-search</text>
+      <line x1="182" y1="340" x2="450" y2="270" stroke="#ddd9d0" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a1)"/>
+    </svg>
+    <div class="diagram-cap">Fig 3.1 — Complete system architecture. Green zone = Mac Mini (private, never directly exposed to internet)</div>
+  </div>
+
+  <h3>Every component — plain English</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Component</th><th>File / location</th><th>What it does</th><th>Status</th></tr></thead>
       <tbody>
         <tr>
-          <td><strong>GitHub Pages form</strong><br><code>form/index.html</code></td>
-          <td>Public internet — any device, anywhere</td>
-          <td>The page a prospect fills in. Hosted for free on GitHub Pages so it has a permanent public URL. Embeds a real HubSpot form for field validation, and uses JavaScript to also fire the pipeline when submitted.</td>
-          <td><span class="badge green">Live</span></td>
+          <td><strong>Brand Forms</strong></td>
+          <td>Trakop site, DairyTech.ai site, MSS main site</td>
+          <td>The pages prospects fill in. Each form has different fields — the pipeline handles all three. When submitted, the form POSTs JSON to the Cloudflare tunnel URL.</td>
+          <td><span class="badge green">Live on each site</span></td>
         </tr>
         <tr>
-          <td><strong>Cloudflare Tunnel</strong><br><code>cloudflared</code></td>
-          <td>Mac Mini + Cloudflare's global network</td>
-          <td>Creates a secure, encrypted bridge from the public internet to your local Mac Mini. Gives server.js a public HTTPS address without ever opening a firewall port or exposing the Mac Mini directly. Free, no account needed for testing.</td>
-          <td><span class="badge amber">Manual start (testing)</span></td>
+          <td><strong>Cloudflare Tunnel</strong></td>
+          <td><code>cloudflared</code> on Mac Mini</td>
+          <td>Creates a secure encrypted bridge from the internet to the Mac Mini. Gives the server a public HTTPS address without opening any firewall ports. The Mac Mini is never directly reachable from outside.</td>
+          <td><span class="badge amber">Manual start</span></td>
         </tr>
         <tr>
-          <td><strong>server.js proxy</strong><br><code>scripts/server.js</code></td>
-          <td>Mac Mini, port 8080</td>
-          <td>Sits between the internet and OpenClaw. Receives incoming submissions, checks the secret token, normalises the data format (handles both the HTML form and HubSpot's different format), wraps it correctly, and forwards to OpenClaw. This is the gatekeeper — nothing reaches OpenClaw without passing through here first.</td>
-          <td><span class="badge amber">Manual start (testing)</span></td>
+          <td><strong>server.js proxy</strong></td>
+          <td><code>scripts/server.js</code> · port 8080</td>
+          <td>The gatekeeper. Receives incoming submissions, checks the secret token, normalises HubSpot verbose payloads to canonical field names (<code>firstname → first_name</code>), wraps the payload in <code>{"body":{...}}</code>, and forwards to OpenClaw.</td>
+          <td><span class="badge amber">Manual start</span></td>
         </tr>
         <tr>
-          <td><strong>OpenClaw gateway</strong><br><code>~/.openclaw/</code></td>
-          <td>Mac Mini, port 18789</td>
-          <td>The AI engine controller. Runs automatically as a macOS background service (daemon) — starts when the Mac Mini boots. Listens for webhooks from server.js, checks the token a second time, and wakes up a fresh, isolated AI agent session for each lead. Also provides the agent with tools: web search, shell commands, Telegram sending.</td>
+          <td><strong>OpenClaw gateway</strong></td>
+          <td><code>~/.openclaw/</code> · port 18789</td>
+          <td>The AI engine controller. Runs as a macOS background daemon — starts automatically on boot. Receives webhooks from server.js, verifies the token again, and starts a fresh isolated AI agent session for each lead.</td>
           <td><span class="badge green">Auto-starts on boot</span></td>
         </tr>
         <tr>
           <td><strong>LEAD_PIPELINE.md</strong></td>
-          <td>Mac Mini, OpenClaw workspace</td>
-          <td>The AI agent's instruction manual — the rulebook. Contains every rule: what to validate, how to score, how to search, what to write in the Telegram message. The agent reads this fresh for every lead. Changing business rules means editing this file — nothing else needs to change.</td>
+          <td>OpenClaw workspace</td>
+          <td>The AI agent's complete instruction manual. Contains every rule — how to validate, score, search, and write the Telegram report. The agent reads this fresh for every lead. All business logic changes go here — nothing else needs to change.</td>
           <td><span class="badge blue">Static file</span></td>
         </tr>
         <tr>
-          <td><strong>AI Agent (GLM 5.1 via z.ai)</strong></td>
-          <td>Runs inside OpenClaw, calls z.ai API</td>
-          <td>The brain. Reads the pipeline instructions, runs web searches on the internet, makes scoring decisions, writes the Telegram report. Each lead gets its own isolated session — so if one lead takes a long time or fails, it cannot affect any other lead being processed at the same time.</td>
-          <td><span class="badge green">On-demand</span></td>
+          <td><strong>AI Agent (Claude)</strong></td>
+          <td>Inside OpenClaw, calls Claude API</td>
+          <td>The brain. Reads pipeline instructions, runs web searches, makes scoring decisions, writes the Telegram report. Each lead gets its own isolated session — parallel leads never interfere with each other.</td>
+          <td><span class="badge green">On-demand per lead</span></td>
         </tr>
         <tr>
-          <td><strong>db.js + SQLite</strong><br><code>scripts/db.js</code></td>
-          <td>Mac Mini, local file</td>
-          <td>A helper script the AI agent runs from the command line to save and retrieve lead data. The database itself is a single file (leads.db) that stores everything: contact info, ICP scores, research findings, pipeline status, Telegram sent confirmation, and a complete event log. No separate database server needed.</td>
+          <td><strong>db.js + SQLite</strong></td>
+          <td><code>scripts/db.js</code> + <code>db/leads.db</code></td>
+          <td>A Node.js CLI script the AI agent calls via shell commands. Handles all database reads and writes. The database is a single local file storing all lead data, ICP scores, research findings, pipeline events, and audit logs. No database server needed.</td>
           <td><span class="badge green">Always available</span></td>
         </tr>
         <tr>
           <td><strong>Telegram</strong></td>
-          <td>External cloud service</td>
-          <td>Where the final lead report lands. The sales team gets a formatted message for every single lead — including spam, rejected, and flagged ones. Nothing is ever silently dropped. The team always knows what came in.</td>
-          <td><span class="badge green">External</span></td>
+          <td>External cloud service · chat ID <code>-1003994912261</code></td>
+          <td>Where every lead notification lands. Spam, rejected, flagged, duplicates — the team sees everything. Nothing is ever silently dropped. The team always knows what came in, even if it was filtered out.</td>
+          <td><span class="badge green">External service</span></td>
         </tr>
       </tbody>
     </table>
-  </div>
-
-  <h3>Why server.js stays in the chain — the proxy pattern</h3>
-  <p>A natural question is: why not have the form talk directly to OpenClaw? Why have a middleman? Four strong reasons:</p>
-
-  <div class="card-grid">
-    <div class="card" style="border-top:3px solid var(--red)">
-      <div class="card-eyebrow">Security</div>
-      <h4>OpenClaw stays hidden</h4>
-      <p>server.js is what the internet can reach (via Cloudflare). OpenClaw never directly handles an external request. If someone tries to attack or abuse the endpoint, they hit server.js — a simple Node.js script — not the AI engine.</p>
-    </div>
-    <div class="card" style="border-top:3px solid var(--blue)">
-      <div class="card-eyebrow">Compatibility</div>
-      <h4>Field name translation</h4>
-      <p>HubSpot sends data with field names like <code>firstname</code>, but the pipeline expects <code>first_name</code>. server.js translates between the two. Switch form tools in future? Change one place in server.js. Everything else is untouched.</p>
-    </div>
-    <div class="card" style="border-top:3px solid var(--amber)">
-      <div class="card-eyebrow">Control</div>
-      <h4>Format normalisation</h4>
-      <p>OpenClaw expects the payload wrapped as <code>{"body": {...}}</code>. server.js does this wrapping. The form does not need to know about OpenClaw's internal format — it just sends plain form data.</p>
-    </div>
-    <div class="card" style="border-top:3px solid var(--green)">
-      <div class="card-eyebrow">Future-proofing</div>
-      <h4>Rate limiting ready</h4>
-      <p>Need to add rate limiting, request logging, or field sanitisation later? One place: server.js. The pipeline, OpenClaw, and the database never need to change. All protection upgrades happen at the gate.</p>
-    </div>
   </div>
 </div>
 
 <hr>
 
-<!-- ─── SECTION 4: DATA FLOW ─── -->
-<div class="section" id="dataflow">
-  <div class="eyebrow">Section 04 — Data flow</div>
-  <h2>One submission, step by step</h2>
-  <p>Here is exactly what happens in the seconds and minutes after a prospect clicks Submit. Every step is explained — nothing is left out or glossed over.</p>
+<!-- ─── SECTION 4: SOURCE DETECTION ─── -->
+<div class="section" id="source">
+  <div class="eyebrow">Section 04 — Source Detection</div>
+  <h2>How the system knows which brand a lead came from</h2>
 
-  <div class="diagram-wrap">
-    <svg width="100%" viewBox="0 0 680 570" role="img">
-      <title>8-step data flow from form submission to pipeline complete</title>
-      <desc>Numbered steps showing each stage of the data journey</desc>
-      <defs><marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-      <!-- step 1 -->
-      <circle cx="44" cy="56" r="20" fill="#4F46E5"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="13" font-weight="500" fill="white" x="44" y="56" text-anchor="middle" dominant-baseline="central">1</text>
-      <rect x="78" y="34" width="578" height="44" rx="8" fill="#EEF2FF" stroke="#c7d2fe" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="98" y="52" dominant-baseline="central">Prospect submits the form on GitHub Pages</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="98" y="69" dominant-baseline="central">Browser JavaScript collects all fields and POSTs a JSON object to the Cloudflare tunnel URL at /submit</text>
-      <line x1="44" y1="77" x2="44" y2="108" stroke="#ddd9d0" stroke-width="1" marker-end="url(#a2)"/>
-      <!-- step 2 -->
-      <circle cx="44" cy="126" r="20" fill="#ea580c"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="13" font-weight="500" fill="white" x="44" y="126" text-anchor="middle" dominant-baseline="central">2</text>
-      <rect x="78" y="104" width="578" height="44" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="98" y="122" dominant-baseline="central">Cloudflare Tunnel receives and forwards the request</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="98" y="139" dominant-baseline="central">The encrypted HTTPS request travels from anywhere in the world and arrives at the Mac Mini's port 8080</text>
-      <line x1="44" y1="147" x2="44" y2="178" stroke="#ddd9d0" stroke-width="1" marker-end="url(#a2)"/>
-      <!-- step 3 -->
-      <circle cx="44" cy="196" r="20" fill="#059669"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="13" font-weight="500" fill="white" x="44" y="196" text-anchor="middle" dominant-baseline="central">3</text>
-      <rect x="78" y="174" width="578" height="44" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="98" y="192" dominant-baseline="central">server.js checks the secret token</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="98" y="209" dominant-baseline="central">Reads the Authorization header. If the token does not match WEBHOOK_SECRET, returns 401 and stops immediately.</text>
-      <line x1="44" y1="217" x2="44" y2="248" stroke="#ddd9d0" stroke-width="1" marker-end="url(#a2)"/>
-      <!-- step 4 -->
-      <circle cx="44" cy="266" r="20" fill="#059669"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="13" font-weight="500" fill="white" x="44" y="266" text-anchor="middle" dominant-baseline="central">4</text>
-      <rect x="78" y="244" width="578" height="44" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="98" y="262" dominant-baseline="central">server.js normalises and wraps the payload</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="98" y="279" dominant-baseline="central">Translates HubSpot field names (e.g. firstname → first_name), adds submitted_at timestamp, wraps in {"body":{...}}</text>
-      <line x1="44" y1="287" x2="44" y2="318" stroke="#ddd9d0" stroke-width="1" marker-end="url(#a2)"/>
-      <!-- step 5 -->
-      <circle cx="44" cy="336" r="20" fill="#059669"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="13" font-weight="500" fill="white" x="44" y="336" text-anchor="middle" dominant-baseline="central">5</text>
-      <rect x="78" y="314" width="578" height="44" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="98" y="332" dominant-baseline="central">OpenClaw receives the webhook</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="98" y="349" dominant-baseline="central">Checks the token again, finds the "lead-intake" hook mapping in its config, starts an isolated AI agent session</text>
-      <line x1="44" y1="357" x2="44" y2="388" stroke="#ddd9d0" stroke-width="1" marker-end="url(#a2)"/>
-      <!-- step 6 -->
-      <circle cx="44" cy="406" r="20" fill="#7c3aed"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="13" font-weight="500" fill="white" x="44" y="406" text-anchor="middle" dominant-baseline="central">6</text>
-      <rect x="78" y="384" width="578" height="44" rx="8" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="98" y="402" dominant-baseline="central">AI agent reads LEAD_PIPELINE.md and runs all 4 stages</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="98" y="419" dominant-baseline="central">Validate → ICP score → Web research (up to 4 searches) → Deliver. All decisions logged to leads.db via db.js.</text>
-      <line x1="44" y1="427" x2="44" y2="458" stroke="#ddd9d0" stroke-width="1" marker-end="url(#a2)"/>
-      <!-- step 7 -->
-      <circle cx="44" cy="476" r="20" fill="#1c1b19"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="13" font-weight="500" fill="white" x="44" y="476" text-anchor="middle" dominant-baseline="central">7</text>
-      <rect x="78" y="454" width="578" height="44" rx="8" fill="#fafaf9" stroke="#ddd9d0" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="98" y="472" dominant-baseline="central">Formatted Telegram message sent to sales team</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="98" y="489" dominant-baseline="central">Contains: lead ID, score, company research, contacts, icebreaker, pain point, pitch strategy, recommended action</text>
-      <line x1="44" y1="497" x2="44" y2="528" stroke="#ddd9d0" stroke-width="1" marker-end="url(#a2)"/>
-      <!-- step 8 -->
-      <circle cx="44" cy="546" r="20" fill="#1c1b19"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="13" font-weight="500" fill="white" x="44" y="546" text-anchor="middle" dominant-baseline="central">8</text>
-      <rect x="78" y="524" width="578" height="36" rx="8" fill="#fafaf9" stroke="#ddd9d0" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="98" y="542" dominant-baseline="central">Lead record updated: status = notified, telegram_sent = true. Pipeline complete.</text>
-    </svg>
-    <div class="diagram-cap">Fig 4.1 — Complete 8-step journey. Total time: approximately 2–5 minutes per lead.</div>
+  <p>Three different forms feed into one pipeline. Before any validation or scoring runs, the system must identify which brand a lead came from — because the ICP scoring model, web search queries, and sales pitch are all different for each brand. This identification step is called <strong>Source Detection</strong>, and it runs before everything else.</p>
+
+  <div class="callout warn">
+    <strong>Important — no explicit source field</strong>
+    Currently, none of the three forms include a hidden <code>source</code> field in their HTML. Source detection works entirely by inspecting which form fields are present in the submitted data. If all three forms ever converge on identical field names, detection could become unreliable — adding an explicit hidden field to each form is the long-term fix.
   </div>
 
-  <h3>What the data looks like at each key point</h3>
-  <p>The payload changes format as it moves through the chain. Here is what it looks like at the three most important points:</p>
+  <h3>Detection algorithm</h3>
+  <p>The system first checks if a <code>source</code> field was explicitly provided. If not, it infers the brand from the field signature:</p>
 
-<pre><span class="c">// ① What the browser sends to the Cloudflare tunnel URL</span>
-POST https://xyz.trycloudflare.com/submit
-Content-Type: application/json
+  <div class="diagram-wrap">
+    <svg width="100%" viewBox="0 0 660 260" role="img">
+      <title>Source detection decision tree</title>
+      <defs><marker id="a3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <!-- Start -->
+      <rect x="240" y="10" width="180" height="40" rx="8" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#3730a3" x="330" y="30" text-anchor="middle" dominant-baseline="central">Incoming form data</text>
+      <line x1="330" y1="52" x2="330" y2="72" stroke="#4F46E5" stroke-width="1" marker-end="url(#a3)"/>
+      <!-- Has source field? -->
+      <rect x="220" y="74" width="220" height="36" rx="8" fill="#f8f8f8" stroke="#ddd9d0"/>
+      <text font-family="DM Sans,sans-serif" font-size="11" fill="#1c1b19" x="330" y="92" text-anchor="middle" dominant-baseline="central">Has explicit source field?</text>
+      <!-- Yes branch -->
+      <line x1="330" y1="112" x2="330" y2="130" stroke="#ddd9d0" stroke-width="1" marker-end="url(#a3)"/>
+      <text font-family="DM Sans,sans-serif" font-size="9" fill="#888680" x="337" y="123">yes</text>
+      <rect x="220" y="132" width="220" height="36" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="11" fill="#166534" x="330" y="150" text-anchor="middle" dominant-baseline="central">Use it directly → done</text>
+      <!-- No branch left -->
+      <line x1="220" y1="92" x2="100" y2="92" stroke="#ddd9d0" stroke-width="1" marker-end="url(#a3)"/>
+      <text font-family="DM Sans,sans-serif" font-size="9" fill="#888680" x="155" y="86">no</text>
+      <!-- Check 1: orders_per_day -->
+      <rect x="14" y="76" width="82" height="54" rx="8" fill="#EEF2FF" stroke="#4F46E5" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="10" font-weight="600" fill="#3730a3" x="55" y="92" text-anchor="middle" dominant-baseline="central">orders_per_day</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="55" y="108" text-anchor="middle" dominant-baseline="central">or customers_served?</text>
+      <line x1="55" y1="132" x2="55" y2="160" stroke="#4F46E5" stroke-width="1" marker-end="url(#a3)"/>
+      <rect x="14" y="162" width="82" height="32" rx="8" fill="#312e81"/>
+      <text font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="white" x="55" y="178" text-anchor="middle" dominant-baseline="central">→ trakop</text>
+      <!-- Check 2: business_domain -->
+      <rect x="440" y="76" width="82" height="54" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="10" font-weight="600" fill="#166534" x="481" y="92" text-anchor="middle" dominant-baseline="central">business_domain</text>
+      <text font-family="DM Sans,sans-serif" font-size="10" fill="#15803d" x="481" y="108" text-anchor="middle" dominant-baseline="central">field present?</text>
+      <line x1="440" y1="92" x2="442" y2="92" stroke="none"/>
+      <line x1="442" y1="92" x2="440" y2="92" stroke="none"/>
+      <path d="M 220 92 L 540 92" fill="none" stroke="#ddd9d0" stroke-width="1"/>
+      <line x1="481" y1="132" x2="481" y2="160" stroke="#22c55e" stroke-width="1" marker-end="url(#a3)"/>
+      <rect x="440" y="162" width="82" height="32" rx="8" fill="#064e3b"/>
+      <text font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="white" x="481" y="178" text-anchor="middle" dominant-baseline="central">→ dairytech</text>
+      <!-- Check 3: MSS / default -->
+      <rect x="220" y="200" width="220" height="36" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="0.8"/>
+      <text font-family="DM Sans,sans-serif" font-size="11" fill="#92400e" x="330" y="218" text-anchor="middle" dominant-baseline="central">name+email+message only → mss</text>
+      <line x1="330" y1="170" x2="330" y2="198" stroke="#ddd9d0" stroke-width="1" marker-end="url(#a3)"/>
+      <text font-family="DM Sans,sans-serif" font-size="9" fill="#888680" x="337" y="186">else</text>
+    </svg>
+    <div class="diagram-cap">Fig 4.1 — Source detection decision tree. Runs before Stage 1 on every lead.</div>
+  </div>
 
-{
-  <span class="s">"first_name"</span>: <span class="s">"Rahul"</span>,
-  <span class="s">"last_name"</span>: <span class="s">"Singh"</span>,
-  <span class="s">"email"</span>: <span class="s">"rahul@dairyfresh.in"</span>,
-  <span class="s">"business_type"</span>: <span class="s">"dairy"</span>,
-  <span class="s">"company_name"</span>: <span class="s">"DairyFresh India"</span>,
-  <span class="s">"requirements"</span>: <span class="s">"Need route optimisation for 300 daily deliveries"</span>,
-  <span class="s">"orders_per_day"</span>: <span class="s">"300"</span>,
-  <span class="s">"customers_served"</span>: <span class="s">"850"</span>,
-  <span class="s">"submitted_at"</span>: <span class="s">"2026-05-14T10:32:00.000Z"</span>
-}
-
-<span class="c">// ④ What server.js sends to OpenClaw (normalised + wrapped)</span>
-POST http://127.0.0.1:18789/hooks/lead-intake
-Authorization: Bearer <span class="n">WEBHOOK_SECRET</span>
-Content-Type: application/json
-
-{
-  <span class="k">"body"</span>: {
-    <span class="s">"first_name"</span>: <span class="s">"Rahul"</span>,
-    <span class="s">"email"</span>: <span class="s">"rahul@dairyfresh.in"</span>,
-    <span class="s">"business_type"</span>: <span class="s">"dairy"</span>
-    <span class="c">// ... all other fields, cleaned and normalised</span>
-  }
-}
-
-<span class="c">// ⑦ What Telegram receives (example)</span>
-NEW LEAD — WARM | Lead #47
-
-Rahul Singh
-rahul@dairyfresh.in | +91 98765 43210
-DairyFresh India | India
-Business Type: dairy
-
-ICP Score: 72/100 (warm)
-Company Size: Small
-...Research Summary, Icebreaker, Pitch Strategy...</pre>
-
-  <h3>What happens when the form is on HubSpot vs GitHub Pages</h3>
-  <p>The system handles both sources identically because server.js normalises both formats before anything reaches OpenClaw:</p>
+  <h3>What source detection drives</h3>
+  <p>Once the source is stored in memory, it controls four things for the rest of the pipeline:</p>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Source</th><th>How data arrives at server.js</th><th>What server.js does</th></tr></thead>
+      <thead><tr><th>Pipeline area</th><th>How source affects it</th></tr></thead>
       <tbody>
-        <tr>
-          <td><strong>GitHub Pages form</strong><br>(current testing)</td>
-          <td>Clean JSON with keys already matching pipeline names: <code>first_name</code>, <code>email</code>, etc.</td>
-          <td>No translation needed. Just adds <code>submitted_at</code> if missing and wraps in <code>{"body":...}</code>.</td>
-        </tr>
-        <tr>
-          <td><strong>HubSpot workflow webhook</strong><br>(production)</td>
-          <td>Verbose format: <code>{"properties":{"firstname":{"value":"Rahul"}}}</code></td>
-          <td>Detects the <code>properties</code> key, flattens it, translates field names, then wraps the same way.</td>
-        </tr>
+        <tr><td><strong>Field normalisation</strong></td><td>DairyTech's <code>name</code> → split to first/last. DairyTech's <code>business_domain</code> → <code>business_type</code>. MSS's <code>message</code> → <code>requirements</code>. Trakop fields need no remapping.</td></tr>
+        <tr><td><strong>ICP Scoring (Stage 2)</strong></td><td>Three different 5-dimension scoring models — Trakop ICP, DairyTech.ai ICP, and MSS ICP. Each is tuned to that brand's ideal customer.</td></tr>
+        <tr><td><strong>Web search queries (Stage 3)</strong></td><td>Each brand has its own set of 7 search queries. Trakop searches for fleet/delivery scale; DairyTech searches for dairy operations; MSS searches for tech investment signals.</td></tr>
+        <tr><td><strong>Telegram output</strong></td><td>Solution product name, pitch strategy, hypothesized pain point, and icebreaker are all brand-specific. A DairyTech lead gets a dairy ERP pitch; a Trakop lead gets a delivery SaaS pitch.</td></tr>
+        <tr><td><strong>Database</strong></td><td>The detected source is saved to the <code>source</code> column in the Stage 2 DB update. Defaults to <code>'webhook'</code> if never explicitly set.</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <h3>Field normalisation</h3>
+  <p>After source detection, field names from different forms are mapped to the canonical names used everywhere in the pipeline:</p>
+  <div class="card-grid-3">
+    <div class="card" style="border-top:3px solid var(--trakop)">
+      <div class="card-eyebrow" style="color:var(--trakop)">Trakop</div>
+      <h4>No remapping needed</h4>
+      <p>Trakop form fields already match the canonical pipeline names. <code>first_name</code>, <code>last_name</code>, <code>business_type</code>, <code>orders_per_day</code>, <code>customers_served</code> — all pass through unchanged.</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--dairy)">
+      <div class="card-eyebrow" style="color:var(--dairy)">DairyTech.ai</div>
+      <h4>Two remappings</h4>
+      <p><code>name</code> → split on last space → <code>first_name</code> + <code>last_name</code><br><code>business_domain</code> → <code>business_type</code><br>All other fields map directly.</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--mss)">
+      <div class="card-eyebrow" style="color:var(--mss)">MSS</div>
+      <h4>Three remappings</h4>
+      <p><code>name</code> → split → <code>first_name</code> + <code>last_name</code><br><code>business_name</code> → <code>company_name</code><br><code>message</code> → <code>requirements</code><br><code>business_type</code> inferred from message.</p>
+    </div>
   </div>
 </div>
 
@@ -571,457 +544,634 @@ Company Size: Small
 
 <!-- ─── SECTION 5: PIPELINE ─── -->
 <div class="section" id="pipeline">
-  <div class="eyebrow">Section 05 — The AI pipeline</div>
-  <h2>The 4 stages — what the AI actually does</h2>
-  <p>Once the data reaches OpenClaw, an AI agent reads the pipeline instructions (<code>LEAD_PIPELINE.md</code>) and runs four stages in sequence. Each stage can stop the pipeline early — this saves time and avoids wasting AI API calls on junk leads. The sales team is notified via Telegram regardless of which stage stops it.</p>
+  <div class="eyebrow">Section 05 — Pipeline Stages</div>
+  <h2>The five-stage pipeline — every step explained</h2>
+  <p>Once the source is detected and fields are normalised, the pipeline runs through five stages in strict order. Each stage either advances the lead or stops it and notifies the sales team. The pipeline <em>always</em> sends a Telegram notification — no lead is ever silently dropped.</p>
 
-  <div class="diagram-wrap">
-    <svg width="100%" viewBox="0 0 680 210" role="img">
-      <title>Pipeline flow showing four stages with early-stop paths</title>
-      <desc>Four stage boxes with arrows showing normal flow and red dashed arrows showing early stop to Telegram</desc>
-      <defs><marker id="a3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-      <!-- stage boxes -->
-      <rect x="10" y="50" width="130" height="54" rx="8" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="9" fill="#6366f1" x="75" y="67" text-anchor="middle" letter-spacing=".1em">STAGE 1</text>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="75" y="84" text-anchor="middle" dominant-baseline="central">Validate</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="75" y="100" text-anchor="middle" dominant-baseline="central">spam · dupes · fields</text>
-      <line x1="142" y1="77" x2="166" y2="77" stroke="#4F46E5" stroke-width="1.2" marker-end="url(#a3)"/>
-      <rect x="168" y="50" width="130" height="54" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="9" fill="#7c3aed" x="233" y="67" text-anchor="middle" letter-spacing=".1em">STAGE 2</text>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="233" y="84" text-anchor="middle" dominant-baseline="central">ICP Score</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#7c3aed" x="233" y="100" text-anchor="middle" dominant-baseline="central">0–100 from form data</text>
-      <line x1="300" y1="77" x2="324" y2="77" stroke="#7c3aed" stroke-width="1.2" marker-end="url(#a3)"/>
-      <rect x="326" y="50" width="130" height="54" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="1"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="9" fill="#15803d" x="391" y="67" text-anchor="middle" letter-spacing=".1em">STAGE 3 + 3b</text>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="391" y="84" text-anchor="middle" dominant-baseline="central">Research</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#15803d" x="391" y="100" text-anchor="middle" dominant-baseline="central">web search + validate</text>
-      <line x1="458" y1="77" x2="482" y2="77" stroke="#059669" stroke-width="1.2" marker-end="url(#a3)"/>
-      <rect x="484" y="50" width="130" height="54" rx="8" fill="#1c1b19"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="9" fill="#7a7875" x="549" y="67" text-anchor="middle" letter-spacing=".1em">STAGE 4</text>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="white" x="549" y="84" text-anchor="middle" dominant-baseline="central">Deliver</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#9d9a96" x="549" y="100" text-anchor="middle" dominant-baseline="central">Telegram report</text>
-      <!-- early stop arrows -->
-      <path d="M 75 105 L 75 148 L 218 148" fill="none" stroke="#dc2626" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a3)"/>
-      <path d="M 233 105 L 233 164 L 356 164" fill="none" stroke="#dc2626" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a3)"/>
-      <path d="M 391 105 L 391 148 L 500 148" fill="none" stroke="#dc2626" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a3)"/>
-      <!-- stop boxes -->
-      <rect x="218" y="132" width="138" height="30" rx="6" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#991b1b" x="287" y="147" text-anchor="middle" dominant-baseline="central">Telegram alert → STOP</text>
-      <rect x="356" y="148" width="144" height="30" rx="6" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#991b1b" x="428" y="163" text-anchor="middle" dominant-baseline="central">Telegram alert → STOP</text>
-      <rect x="500" y="132" width="138" height="30" rx="6" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#991b1b" x="569" y="147" text-anchor="middle" dominant-baseline="central">Telegram alert → STOP</text>
-      <text font-family="DM Sans,sans-serif" font-size="11" fill="#888680" x="340" y="195" text-anchor="middle">Sales team is always notified — for every outcome including rejected and spam leads</text>
-    </svg>
-    <div class="diagram-cap">Fig 5.1 — Pipeline flow. Each stage can trigger an early stop. The red dashed paths always end with a Telegram notification.</div>
-  </div>
-
-  <div class="stage-row">
-    <div class="stage-card" style="border-top:3px solid #4F46E5">
-      <div class="stage-label" style="color:#4F46E5">Stage 1 — Validate</div>
-      <h4>Is this a real, clean lead?</h4>
-      <ul>
-        <li>Checks required fields are present (name, email, business type, requirements)</li>
-        <li>Spam detection: gibberish text, disposable email domains, nonsense requirements</li>
-        <li>Duplicate check: has this email or company submitted before?</li>
-        <li>Competitor check: is the email domain from a known competitor?</li>
-        <li>If any check fails → Telegram alert with reason, pipeline stops</li>
-      </ul>
+  <div class="pipeline-flow">
+    <!-- Stage 1 -->
+    <div class="pipe-stage">
+      <div class="pipe-num" style="background:#dc2626;">1</div>
+      <div class="pipe-body">
+        <h4>Stage 1 — VALIDATE</h4>
+        <p>Four sequential checks — all run before anything is saved to the database. The database insert happens only if all four checks pass.</p>
+        <ul>
+          <li><strong>1.1 Missing data</strong> — Checks required fields. Flags as <code>incomplete</code> if any are missing or email is invalid. For MSS, <code>business_type</code> is inferred from the message rather than required on the form.</li>
+          <li><strong>1.2 Spam check</strong> — Looks for gibberish names, disposable email domains (mailinator, yopmail, etc.), requirements under 5 meaningful words, or obviously fake phone numbers.</li>
+          <li><strong>1.3 Duplicate check</strong> — Queries the database by email address only. Company name is intentionally ignored (same company can have different names; different companies can share a name). If the email already exists, retrieves the original lead's full record and includes it in the Telegram notification.</li>
+          <li><strong>1.4 Competitor check</strong> — Checks the email domain against a hardcoded competitor list (Tookan, OnFleet, Routific, Bringg, etc.) and a live competitor table in the database.</li>
+        </ul>
+        <div style="margin-top:12px;padding:10px 14px;background:#fef2f2;border-radius:8px;border-left:3px solid #dc2626;font-size:13px;color:#7f1d1d;">
+          <strong style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:4px;">If any check fails</strong>
+          No DB insert. Telegram notification sent immediately. Pipeline stops. The only exception: for duplicates, the <em>original</em> record is updated to mark it as a duplicate target — no new record is created.
+        </div>
+      </div>
     </div>
-    <div class="stage-card" style="border-top:3px solid #7c3aed">
-      <div class="stage-label" style="color:#7c3aed">Stage 2 — ICP Scoring</div>
-      <h4>How good a fit are they?</h4>
-      <ul>
-        <li>Business type fit: does their category match a Trakop product?</li>
-        <li>Company size: individual, small (1–50), mid (50–500), enterprise (500+)</li>
-        <li>Solution need: do their requirements actually describe needing delivery software?</li>
-        <li>Order volume: orders/day and customers served signal their scale</li>
-        <li>Score under 30 → rejected, Telegram alert, pipeline stops</li>
-      </ul>
+    <!-- Stage 2 -->
+    <div class="pipe-stage">
+      <div class="pipe-num" style="background:var(--amber);">2</div>
+      <div class="pipe-body">
+        <h4>Stage 2 — ICP SCORING (Preliminary)</h4>
+        <p>The lead is scored against the Ideal Customer Profile for the detected brand. No web searches — this is a form-data-only score. Scored in 5 dimensions, totalled (max 110), then normalised to a 0–100 scale.</p>
+        <ul>
+          <li><strong>trakop source</strong> → Trakop ICP (delivery model fit, operational volume, pain points, decision maker, geography)</li>
+          <li><strong>dairytech source</strong> → DairyTech.ai ICP (dairy domain fit, dairy scale, dairy pain points, decision maker, geography)</li>
+          <li><strong>mss source</strong> → MSS ICP (software project need, business scale/budget, pain clarity, decision maker, geography)</li>
+        </ul>
+        <ul>
+          <li>Score &lt; 30 (COLD) → Send cold rejection Telegram → STOP</li>
+          <li>Score 30–49 (COOL) → Proceed to Stage 3 — never reject COOL without research</li>
+          <li>Score 50+ (WARM/HOT) → Proceed to Stage 3</li>
+        </ul>
+      </div>
     </div>
-    <div class="stage-card" style="border-top:3px solid #059669">
-      <div class="stage-label" style="color:#059669">Stage 3 + 3b — Research</div>
-      <h4>What does the web say about them?</h4>
-      <ul>
-        <li>Runs up to 4 targeted web searches (company + business type, LinkedIn, revenue signals)</li>
-        <li>Finds: website, LinkedIn, key contacts, employee count, tech stack, recent news</li>
-        <li>Stage 3b cross-checks: does research confirm what the form said?</li>
-        <li>ICP score revised up or down based on findings</li>
-        <li>If research reveals competitor or score drops below 30 → stop</li>
-      </ul>
+    <!-- Stage 3 -->
+    <div class="pipe-stage">
+      <div class="pipe-num" style="background:#0284c7;">3</div>
+      <div class="pipe-body">
+        <h4>Stage 3 — WEB RESEARCH (Mandatory)</h4>
+        <p>Up to 7 targeted web searches are run to gather real, cited intelligence on the company. All findings must come from actual search results — no training knowledge. Results must come from at least 3 different source domains.</p>
+        <ul>
+          <li>Queries 1–2: Company overview and country profile (always run)</li>
+          <li>Queries 3–4: LinkedIn contacts, recent news (run if contacts/size unclear)</li>
+          <li>Queries 5–6: ZoomInfo/Crunchbase, business-specific operational terms</li>
+          <li>Query 7: Dedicated revenue search — <code>{company} revenue OR turnover OR valuation OR funding</code> (always run)</li>
+        </ul>
+        <ul>
+          <li>Low web presence: handled gracefully. Try alternate queries (founder name, broader company name, local directories). Low presence ≠ bad lead — especially in WhatsApp-heavy markets.</li>
+          <li>B2C / individual leads: search uses the person's name instead of company. Look for Facebook pages, Google Maps, WhatsApp Business listings.</li>
+        </ul>
+      </div>
     </div>
-    <div class="stage-card" style="border-top:3px solid #1c1b19">
-      <div class="stage-label" style="color:#888680">Stage 4 — Deliver</div>
-      <h4>Send the briefing to sales</h4>
-      <ul>
-        <li>Compiles everything into a structured Telegram message</li>
-        <li>Includes: lead ID, ICP score, company research, website, LinkedIn</li>
-        <li>Adds: icebreaker, hypothesised pain point, pitch strategy</li>
-        <li>Recommended action: call immediately / reach out today / low priority</li>
-        <li>Updates database: telegram_sent = true, status = notified</li>
-      </ul>
+    <!-- Stage 3b -->
+    <div class="pipe-stage">
+      <div class="pipe-num" style="background:#7c3aed;">3b</div>
+      <div class="pipe-body">
+        <h4>Stage 3b — VALIDATION (Research Cross-Check)</h4>
+        <p>The preliminary ICP score is revisited using what was actually found online. This stage always runs — even if Stage 3 found nothing.</p>
+        <ul>
+          <li><strong>Business type check</strong> — Does research confirm what the form said? Flag any mismatch.</li>
+          <li><strong>Scale check</strong> — Does research confirm stated order volume / customer count? Adjust company size and score if significantly different.</li>
+          <li><strong>Competitor re-check</strong> — Did any research finding reveal this is a delivery software vendor? If yes → reject as competitor.</li>
+          <li><strong>ICP score revision</strong> — Adjust score ±5 to ±20 points based on findings. No research = 0 change.</li>
+          <li><strong>Discrepancy flagging</strong> — Any clear contradiction between form data and research is documented explicitly.</li>
+        </ul>
+        <ul>
+          <li>Revised score &lt; 30 → Post-research cold rejection (includes all research findings in Telegram) → STOP</li>
+          <li>Competitor revealed → Send competitor flag Telegram → STOP</li>
+          <li>Otherwise → proceed to Stage 4</li>
+        </ul>
+      </div>
     </div>
-  </div>
-
-  <h3>ICP scoring — how the 0–100 score works</h3>
-  <p>ICP stands for Ideal Customer Profile. The score represents how closely this lead matches the type of business Trakop is built for. It is calculated twice: once from form data alone in Stage 2, then revised after web research in Stage 3b.</p>
-
-  <div class="tier-grid">
-    <div class="tier hot">
-      <span class="tier-score">80–100</span>
-      <span class="tier-name">🔥 Hot</span>
-      <span class="tier-action">Strong fit, clear need, ready to buy. Call immediately.</span>
-    </div>
-    <div class="tier warm">
-      <span class="tier-score">50–79</span>
-      <span class="tier-name">🌡 Warm</span>
-      <span class="tier-action">Decent fit, some open questions. Reach out today.</span>
-    </div>
-    <div class="tier cold">
-      <span class="tier-score">30–49</span>
-      <span class="tier-name">❄ Cold</span>
-      <span class="tier-action">Weak fit, unlikely to convert. Low priority follow-up.</span>
-    </div>
-    <div class="tier rej">
-      <span class="tier-score">0–29</span>
-      <span class="tier-name">✖ Rejected</span>
-      <span class="tier-action">Poor fit. Pipeline stops here. No follow-up needed.</span>
+    <!-- Stage 4 -->
+    <div class="pipe-stage">
+      <div class="pipe-num" style="background:#059669;">4</div>
+      <div class="pipe-body">
+        <h4>Stage 4 — DELIVER</h4>
+        <p>The full lead report is compiled and sent to the sales team on Telegram. The DB is updated to <code>status = notified</code>. This stage always runs for leads that reach it — DB failures never block delivery.</p>
+        <ul>
+          <li>ICP score and full dimensional breakdown</li>
+          <li>Company research (8–12 bullets with source URLs, blank line between each)</li>
+          <li>Validation findings (separate section from research)</li>
+          <li>Revenue estimate — direct, proxy-calculated, or "Not found" only if truly no data</li>
+          <li>Sales enablement: brand-specific icebreaker, pain point, pitch strategy</li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <div class="callout info">
-    <strong>Important — the score is calculated twice</strong>
-    The Stage 2 score is preliminary — based only on what the prospect wrote in the form. After Stage 3 research, the score can increase by up to 10 points if research confirms good fit, or decrease significantly if research reveals mismatches (e.g. the company is actually an enterprise too large for Trakop's sweet spot, or they are a delivery software competitor themselves).
+    <strong>Company name inference</strong>
+    If the form has no company name and the email is a business domain (not Gmail/Yahoo), the system infers the company name from the email domain — e.g. <code>info@freshmill.co.ke</code> → <strong>Fresh Mill</strong>. If the email is personal and no company is provided, <code>company_name</code> is set to "Individual" and the lead is treated as a B2C operator.
   </div>
 </div>
 
 <hr>
 
-<!-- ─── SECTION 6: SECURITY ─── -->
-<div class="section" id="security">
-  <div class="eyebrow">Section 06 — Security</div>
-  <h2>How everything is protected</h2>
-  <p>Even though the system now accepts submissions from anyone on the internet, multiple independent layers of protection prevent abuse, unauthorised access, and data leakage. Each layer works independently — so if one were somehow bypassed, the others still hold.</p>
+<!-- ─── SECTION 6: ICP SCORING ─── -->
+<div class="section" id="icp">
+  <div class="eyebrow">Section 06 — ICP Scoring</div>
+  <h2>How leads are scored — three models, one formula</h2>
 
-  <div class="diagram-wrap">
-    <svg width="100%" viewBox="0 0 680 310" role="img">
-      <title>Four concentric security layers</title>
-      <desc>Nested rectangles showing Cloudflare, token check, OpenClaw auth, and loopback binding as security layers</desc>
-      <defs><marker id="a4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-      <!-- Layer 1 -->
-      <rect x="12" y="12" width="656" height="284" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="1" stroke-dasharray="7 4"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="9" fill="#ea580c" x="26" y="30" letter-spacing=".12em">LAYER 1 — Cloudflare (HTTPS encryption + DDoS protection)</text>
-      <!-- Layer 2 -->
-      <rect x="36" y="46" width="608" height="232" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="1" stroke-dasharray="6 4"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="9" fill="#2563eb" x="50" y="64" letter-spacing=".12em">LAYER 2 — WEBHOOK_SECRET token (server.js rejects all requests without it)</text>
-      <!-- Layer 3 -->
-      <rect x="60" y="80" width="560" height="180" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="1" stroke-dasharray="5 3"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="9" fill="#15803d" x="74" y="97" letter-spacing=".12em">LAYER 3 — OpenClaw re-checks token before waking any agent</text>
-      <!-- Layer 4 -->
-      <rect x="84" y="112" width="512" height="128" rx="8" fill="#f9fafb" stroke="#9ca3af" stroke-width="0.8" stroke-dasharray="4 3"/>
-      <text font-family="IBM Plex Mono,monospace" font-size="9" fill="#6b7280" x="98" y="129" letter-spacing=".12em">LAYER 4 — Loopback binding (OpenClaw + DB on 127.0.0.1, unreachable from internet)</text>
-      <!-- Inner components -->
-      <rect x="110" y="148" width="130" height="72" rx="6" fill="white" stroke="#e5e7eb" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="175" y="177" text-anchor="middle" dominant-baseline="central">OpenClaw</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="175" y="196" text-anchor="middle" dominant-baseline="central">AI engine</text>
-      <rect x="275" y="148" width="130" height="72" rx="6" fill="white" stroke="#e5e7eb" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="340" y="177" text-anchor="middle" dominant-baseline="central">SQLite DB</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="340" y="196" text-anchor="middle" dominant-baseline="central">leads.db</text>
-      <rect x="440" y="148" width="130" height="72" rx="6" fill="white" stroke="#e5e7eb" stroke-width="0.5"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="505" y="177" text-anchor="middle" dominant-baseline="central">Pipeline</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="505" y="196" text-anchor="middle" dominant-baseline="central">LEAD_PIPELINE.md</text>
-    </svg>
-    <div class="diagram-cap">Fig 6.1 — Four independent security layers. The innermost components are physically unreachable from the internet.</div>
+  <p>Every lead is scored on five dimensions. The same structure applies to all three brands — but the criteria inside each dimension differ based on what matters for that brand. Raw scores total up to 110 points maximum, then are normalised to a clean 0–100 scale by dividing by 1.10 and rounding.</p>
+
+  <div class="callout info">
+    <strong>Normalisation formula</strong>
+    Total raw points (A+B+C+D+E) ÷ 1.10 = ICP score (0–100). This preserves relative differences between leads while fitting everything into a clean 100-point scale.
   </div>
 
-  <div class="card-grid">
-    <div class="card" style="border-left:3px solid #ea580c">
-      <div class="card-eyebrow">Layer 1 — Cloudflare</div>
-      <h4>HTTPS encryption + DDoS protection</h4>
-      <p>All traffic between the prospect's browser and the Mac Mini is encrypted end-to-end. Cloudflare also absorbs denial-of-service attacks — a flood of fake requests gets stopped at Cloudflare's network before it reaches the Mac Mini.</p>
+  <h3>The four tiers</h3>
+  <div class="tier-grid">
+    <div class="tier hot">
+      <span class="tier-score">80–100</span>
+      <span class="tier-name">HOT</span>
+      <span class="tier-action">Strong fit, clear need. Prioritise immediately.</span>
     </div>
-    <div class="card" style="border-left:3px solid #3b82f6">
-      <div class="card-eyebrow">Layer 2 — Secret token (server.js)</div>
-      <h4>Every request must carry the password</h4>
-      <p>server.js checks the <code>Authorization</code> header on every request. If it does not contain the exact <code>WEBHOOK_SECRET</code> value from your <code>.env</code> file, the request is rejected with a 401 error instantly. OpenClaw never sees it.</p>
+    <div class="tier warm">
+      <span class="tier-score">50–79</span>
+      <span class="tier-name">WARM</span>
+      <span class="tier-action">Decent fit, some gaps. Worth reaching out.</span>
     </div>
-    <div class="card" style="border-left:3px solid #22c55e">
-      <div class="card-eyebrow">Layer 3 — OpenClaw auth</div>
-      <h4>Second token check</h4>
-      <p>Even though server.js already verified the token, OpenClaw checks it again independently. A request that somehow slipped past server.js would still fail here. Two independent checkpoints for the same credential.</p>
+    <div class="tier cool">
+      <span class="tier-score">30–49</span>
+      <span class="tier-name">COOL</span>
+      <span class="tier-action">Weak signals. Proceed to research before deciding.</span>
     </div>
-    <div class="card" style="border-left:3px solid #9ca3af">
-      <div class="card-eyebrow">Layer 4 — Loopback binding</div>
-      <h4>Core services are physically unreachable</h4>
-      <p>OpenClaw and the database are bound to <code>127.0.0.1</code> (the machine's own loopback address). Even if every other security layer failed, these services cannot receive traffic from outside the Mac Mini — not from the local network, not from the internet.</p>
-    </div>
-    <div class="card" style="border-left:3px solid #7c3aed">
-      <div class="card-eyebrow">Pipeline — Stage 1</div>
-      <h4>Spam, duplicate, and competitor blocking</h4>
-      <p>The pipeline itself acts as another filter. Every submission is checked against known competitor domains, spam patterns, and duplicate submissions. Anything suspicious is logged and rejected before the expensive web research stage runs.</p>
-    </div>
-    <div class="card" style="border-left:3px solid #1c1b19">
-      <div class="card-eyebrow">Data storage</div>
-      <h4>Everything stays on the Mac Mini</h4>
-      <p>All lead data is stored in a local SQLite file. Nothing is sent to a third-party database or cloud storage. The only data that leaves the Mac Mini is the formatted Telegram message — and that contains only the briefing, not raw database records.</p>
+    <div class="tier cold">
+      <span class="tier-score">0–29</span>
+      <span class="tier-name">COLD</span>
+      <span class="tier-action">Poor fit. Reject without research.</span>
     </div>
   </div>
 
   <div class="callout warn">
-    <strong>The most important credential — WEBHOOK_SECRET</strong>
-    The secret in your <code>.env</code> file is the single key that protects the entire endpoint. Keep it out of version control (your <code>.gitignore</code> should exclude <code>.env</code> — verify this). If it is ever exposed or committed to GitHub, generate a new one immediately and update it in both <code>.env</code> and the GitHub Pages form's JavaScript config (<code>TUNNEL_URL</code> header is sent automatically — the secret is what OpenClaw validates).
+    <strong>COOL leads are never rejected without research</strong>
+    A COOL score (30–49) means the form data alone is insufficient to decide. The pipeline always runs Stage 3 web research for COOL leads. The research may lift the score into WARM or confirm it should be rejected.
   </div>
 
-  <h3>What an attacker would face</h3>
-  <p>If someone discovered the tunnel URL and tried to abuse it, here is what they would encounter:</p>
-  <ul class="step-list">
-    <li><div class="step-num">1</div><div class="step-content"><h4>They send a POST request to the tunnel URL</h4><p>Cloudflare receives it over HTTPS. No issue yet for the attacker.</p></div></li>
-    <li><div class="step-num">2</div><div class="step-content"><h4>server.js checks the Authorization header</h4><p>No valid token → immediate 401 rejection. The request never reaches OpenClaw. Pipeline is never touched.</p></div></li>
-    <li><div class="step-num" style="background:#059669">✓</div><div class="step-content"><h4>Attack stopped at Layer 2</h4><p>Without knowing the exact WEBHOOK_SECRET, an attacker can do nothing. The token is a long random string — not guessable by brute force in any reasonable time.</p></div></li>
+  <h3>Five dimensions — all three models</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Dimension</th><th>Max pts</th><th>Trakop asks</th><th>DairyTech.ai asks</th><th>MSS asks</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>A. Business / Domain Fit</strong></td>
+          <td>30</td>
+          <td>Does this business run recurring scheduled deliveries with its own fleet?</td>
+          <td>Does this business operate in the dairy supply chain?</td>
+          <td>Does this business need custom software, ERP/CRM, or AI?</td>
+        </tr>
+        <tr>
+          <td><strong>B. Operational Scale</strong></td>
+          <td>25</td>
+          <td>Orders/day and customers in Trakop sweet spot (20–1,000/day)?</td>
+          <td>Dairy volume — liters/day, routes, SKUs, plant count?</td>
+          <td>Business size and budget signal — employee count, project scope?</td>
+        </tr>
+        <tr>
+          <td><strong>C. Pain Points</strong></td>
+          <td>25</td>
+          <td>Manual routes, WhatsApp orders, subscription chaos, container tracking?</td>
+          <td>Inventory spoilage, farmer payment disputes, batch traceability, cold chain?</td>
+          <td>Specific problem described — replacing spreadsheets, need to automate X?</td>
+        </tr>
+        <tr>
+          <td><strong>D. Decision Maker</strong></td>
+          <td>20</td>
+          <td colspan="3">Same across all brands: Owner/CEO (18–20) → Ops Manager (13–17) → Mid-level (7–12) → Generic (4–6) → Shared inbox (0)</td>
+        </tr>
+        <tr>
+          <td><strong>E. Geography</strong></td>
+          <td>10</td>
+          <td colspan="3">Same across all brands: India/GCC (8–10) → SE Asia/Africa/LATAM (5–7) → USA (3–4) → Western Europe (1–2) → Unknown (0)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Score revision in Stage 3b</h3>
+  <p>The Stage 2 score is preliminary — based only on form data. After web research (Stage 3), the score is revised up or down based on findings:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Research finding</th><th>Score adjustment</th></tr></thead>
+      <tbody>
+        <tr><td>Research strongly confirms fit — confirmed fleet, scale, pain points, decision maker</td><td>+5 to +10 points</td></tr>
+        <tr><td>Research partially confirms — some signals found but not all</td><td>+2 to +4 points</td></tr>
+        <tr><td>Research reveals mismatch — wrong business type, overstated scale, no fleet found</td><td>−5 to −20 points</td></tr>
+        <tr><td>No web presence found — all searches returned nothing</td><td>0 change — score unchanged, noted in report</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- ─── SECTION 7: WEB RESEARCH ─── -->
+<div class="section" id="research">
+  <div class="eyebrow">Section 07 — Web Research</div>
+  <h2>How the system researches every company</h2>
+
+  <p>Stage 3 is mandatory — it runs for every lead that is not COLD or stopped earlier. The AI agent runs up to 7 targeted searches, reads the top 7 results per query, and extracts only data that is directly stated in actual search results. Training knowledge is banned — every claim must be cited with a source URL.</p>
+
+  <h3>Search tool waterfall</h3>
+  <div class="card-grid-3">
+    <div class="card" style="border-top:3px solid #4F46E5">
+      <div class="card-eyebrow">Primary</div>
+      <h4>SearXNG plugin</h4>
+      <p>Used for queries 1–4. Aggregates results from multiple engines. No API key required.</p>
+    </div>
+    <div class="card" style="border-top:3px solid #0284c7">
+      <div class="card-eyebrow">Fallback</div>
+      <h4>DDG web search</h4>
+      <p>Used if SearXNG fails for a query. Primary tool for queries 5–6.</p>
+    </div>
+    <div class="card" style="border-top:3px solid #888680">
+      <div class="card-eyebrow">Final fallback</div>
+      <h4>web-search / local-web-search</h4>
+      <p>Only used if both primary tools fail for the same query. One attempt maximum per query.</p>
+    </div>
+  </div>
+
+  <h3>The 7 queries — per brand</h3>
+
+  <div class="query-block">
+    <div class="qb-head" style="color:var(--trakop);">Trakop source queries</div>
+    <div class="qb-body">
+      <div class="q"><span class="qn">Q1</span>{company_name} {business_type} delivery — fleet ownership, routes, scale</div>
+      <div class="q"><span class="qn">Q2</span>{company_name} {country} — website, founding year, locations</div>
+      <div class="q"><span class="qn">Q3</span>{company_name} LinkedIn — key contacts, employee count</div>
+      <div class="q"><span class="qn">Q4</span>{company_name} news OR press release OR expansion {year} — recent developments</div>
+      <div class="q"><span class="qn">Q5</span>"{company_name}" site:zoominfo.com OR site:crunchbase.com OR site:dnb.com</div>
+      <div class="q"><span class="qn">Q6</span>{company_name} {business_type} customers OR orders OR routes OR fleet</div>
+      <div class="q"><span class="qn special">Q7 ★</span>{company_name} revenue OR annual revenue OR turnover OR valuation OR funding amount</div>
+    </div>
+  </div>
+
+  <div class="query-block">
+    <div class="qb-head" style="color:var(--dairy);">DairyTech.ai source queries</div>
+    <div class="qb-body">
+      <div class="q"><span class="qn">Q1</span>{company_name} dairy OR milk distribution OR production {country}</div>
+      <div class="q"><span class="qn">Q2</span>{company_name} {country} — website, company profile, locations</div>
+      <div class="q"><span class="qn">Q3</span>{company_name} LinkedIn — key contacts, employee count</div>
+      <div class="q"><span class="qn">Q4</span>{company_name} dairy news OR expansion OR funding {year}</div>
+      <div class="q"><span class="qn">Q5</span>"{company_name}" site:zoominfo.com OR site:crunchbase.com OR site:dnb.com</div>
+      <div class="q"><span class="qn">Q6</span>{company_name} dairy farmer OR procurement OR production volumes OR liters</div>
+      <div class="q"><span class="qn special">Q7 ★</span>{company_name} revenue OR annual revenue OR turnover OR valuation OR funding amount</div>
+    </div>
+  </div>
+
+  <div class="query-block">
+    <div class="qb-head" style="color:var(--mss);">MSS source queries</div>
+    <div class="qb-body">
+      <div class="q"><span class="qn">Q1</span>{company_name} software OR technology OR digital {country}</div>
+      <div class="q"><span class="qn">Q2</span>{company_name} {country} — company profile, website, scale</div>
+      <div class="q"><span class="qn">Q3</span>{company_name} LinkedIn — key contacts, employee count, hiring signals</div>
+      <div class="q"><span class="qn">Q4</span>{company_name} news OR funding OR expansion {year} — growth signals</div>
+      <div class="q"><span class="qn">Q5</span>"{company_name}" site:zoominfo.com OR site:crunchbase.com OR site:dnb.com</div>
+      <div class="q"><span class="qn">Q6</span>{company_name} software project OR ERP OR CRM OR automation OR custom development</div>
+      <div class="q"><span class="qn special">Q7 ★</span>{company_name} revenue OR annual revenue OR turnover OR valuation OR funding amount</div>
+    </div>
+  </div>
+
+  <div class="callout success">
+    <strong>Why a dedicated revenue query (Q7)?</strong>
+    Revenue data rarely surfaces in general company searches. The dedicated Q7 query targets it directly — looking for press mentions of ARR, D&B estimates, Crunchbase funding, or any reported turnover figure. If nothing is found after 7 queries, only then is "Not found" acceptable.
+  </div>
+
+  <h3>Revenue estimation rules</h3>
+  <div class="step-list">
+    <li>
+      <div class="step-num" style="background:var(--green);">1</div>
+      <div class="step-content">
+        <h4>Direct figure</h4>
+        <p>Revenue stated in a news article, Crunchbase, D&amp;B, or company profile → use verbatim with citation. E.g. <code>"~$2M ARR (crunchbase.com)"</code></p>
+      </div>
+    </li>
+    <li>
+      <div class="step-num" style="background:var(--amber);">2</div>
+      <div class="step-content">
+        <h4>Proxy calculation</h4>
+        <p>No direct figure but customer count + visible pricing are known → calculate and label clearly. E.g. <code>"Est. $432K/yr (800 customers × $45/mo avg — from website pricing)"</code></p>
+      </div>
+    </li>
+    <li>
+      <div class="step-num" style="background:var(--ink3);">3</div>
+      <div class="step-content">
+        <h4>"Not found"</h4>
+        <p>Only acceptable after all 7 queries return zero revenue signals. Not a first-resort answer.</p>
+      </div>
+    </li>
+  </div>
+
+  <h3>Low web presence</h3>
+  <p>Some clients — particularly small operators or businesses in markets with low internet penetration — have minimal online presence. This is expected and common. The pipeline handles it:</p>
+  <ul style="margin:12px 0 16px;padding-left:20px;color:var(--ink2);font-size:14px;line-height:1.8;">
+    <li>Try the founder's name as a search anchor if company searches fail</li>
+    <li>Try a simpler version of the company name (drop "Ltd", "Group", "Pvt")</li>
+    <li>Try local directory or registry searches for the city</li>
+    <li>Flag "low web presence" explicitly in the Telegram report for the team's awareness</li>
+    <li>Low web presence alone does NOT lower the ICP score — score on form data</li>
+    <li>In WhatsApp-heavy markets (Africa, South Asia, Middle East) this is especially normal</li>
   </ul>
 </div>
 
 <hr>
 
-<!-- ─── SECTION 7: PRODUCTION ─── -->
-<div class="section" id="production">
-  <div class="eyebrow">Section 07 — Production handover</div>
-  <h2>Connecting the company's real HubSpot</h2>
-  <p>The company uses HubSpot (paid plan). When the testing phase is complete and it is time to connect their real form, here is exactly what changes and what stays the same forever.</p>
+<!-- ─── SECTION 8: DATABASE ─── -->
+<div class="section" id="database">
+  <div class="eyebrow">Section 08 — Database</div>
+  <h2>What gets stored and how</h2>
 
-  <div class="diagram-wrap">
-    <svg width="100%" viewBox="0 0 680 160" role="img">
-      <title>Production architecture with HubSpot workflow webhook</title>
-      <desc>HubSpot workflow sends webhook through permanent Cloudflare tunnel to server.js proxy</desc>
-      <defs><marker id="a5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-      <rect x="10" y="50" width="148" height="70" rx="8" fill="white" stroke="#4F46E5" stroke-width="1"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="84" y="74" text-anchor="middle" dominant-baseline="central">HubSpot Form</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="84" y="92" text-anchor="middle" dominant-baseline="central">company paid account</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#6366f1" x="84" y="108" text-anchor="middle" dominant-baseline="central">workflow webhook</text>
-      <line x1="160" y1="85" x2="186" y2="85" stroke="#4F46E5" stroke-width="1.5" marker-end="url(#a5)"/>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="173" y="77" text-anchor="middle">POST</text>
-      <rect x="188" y="50" width="148" height="70" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="262" y="74" text-anchor="middle" dominant-baseline="central">Permanent Tunnel</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="262" y="92" text-anchor="middle" dominant-baseline="central">cloudflared service</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#ea580c" x="262" y="108" text-anchor="middle" dominant-baseline="central">stable URL, auto-restarts</text>
-      <line x1="338" y1="85" x2="364" y2="85" stroke="#ea580c" stroke-width="1.5" marker-end="url(#a5)"/>
-      <rect x="366" y="50" width="148" height="70" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="1"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1c1b19" x="440" y="74" text-anchor="middle" dominant-baseline="central">server.js</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#888680" x="440" y="92" text-anchor="middle" dominant-baseline="central">unchanged forever</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#15803d" x="440" y="108" text-anchor="middle" dominant-baseline="central">port 8080</text>
-      <line x1="516" y1="85" x2="542" y2="85" stroke="#059669" stroke-width="1.5" marker-end="url(#a5)"/>
-      <rect x="544" y="50" width="124" height="70" rx="8" fill="#1c1b19"/>
-      <text font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="white" x="606" y="74" text-anchor="middle" dominant-baseline="central">Pipeline</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#9d9a96" x="606" y="92" text-anchor="middle" dominant-baseline="central">unchanged forever</text>
-      <text font-family="DM Sans,sans-serif" font-size="10" fill="#7a7875" x="606" y="108" text-anchor="middle" dominant-baseline="central">→ Telegram</text>
-    </svg>
-    <div class="diagram-cap">Fig 7.1 — Production setup. Only the tunnel becomes permanent and the form source changes. Everything else: untouched.</div>
+  <p>All lead data is stored in a single SQLite file at <code>db/leads.db</code>. The AI agent never writes to it directly — it calls <code>db.js</code> from the command line, which runs the appropriate SQL query and returns results as JSON. Three tables exist.</p>
+
+  <h3>How db.js works</h3>
+  <p>The agent runs shell commands like:</p>
+  <pre><code>~/.nvm/versions/node/v22.22.2/bin/node lead-automation/scripts/db.js <span class="k">insert</span> <span class="s">'{"first_name":"Rajesh","email":"r@acme.com",...}'</span></code></pre>
+  <p>The full Node.js binary path is required — bare <code>node</code> is never used. Supported commands: <code>insert</code>, <code>get</code>, <code>update</code>, <code>duplicate</code>, <code>competitors</code>, <code>add-competitor</code>, <code>log</code>, <code>stats</code>, <code>recent</code>, <code>status</code>.</p>
+
+  <div class="callout warn">
+    <strong>Critical: check before insert</strong>
+    The duplicate check (<code>db.js duplicate</code>) always runs before the lead is inserted. Inserting first and then checking would cause a false duplicate match against the just-inserted record. The insert only happens after all Stage 1 checks pass.
   </div>
 
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Item</th><th>Testing (now)</th><th>Production (company HubSpot)</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong>Form</strong></td>
-          <td>GitHub Pages HTML with HubSpot embed (your test account)</td>
-          <td>Company's HubSpot form on their own website</td>
-        </tr>
-        <tr>
-          <td><strong>How it triggers the pipeline</strong></td>
-          <td>JavaScript intercept on form submit → POSTs to tunnel URL</td>
-          <td>HubSpot Workflow → "Send webhook" action → tunnel URL</td>
-        </tr>
-        <tr>
-          <td><strong>Cloudflare tunnel</strong></td>
-          <td>Temporary — URL changes each restart, run manually</td>
-          <td>Permanent named tunnel, installed as macOS service, stable URL</td>
-        </tr>
-        <tr>
-          <td><strong>server.js startup</strong></td>
-          <td>Started manually in Terminal</td>
-          <td>PM2 process manager — auto-starts and restarts on crash/reboot</td>
-        </tr>
-        <tr>
-          <td><strong>server.js code</strong></td>
-          <td>Current code</td>
-          <td><span class="badge green">No changes</span> — HubSpot normalisation already built in</td>
-        </tr>
-        <tr>
-          <td><strong>OpenClaw</strong></td>
-          <td>Current config</td>
-          <td><span class="badge green">No changes</span></td>
-        </tr>
-        <tr>
-          <td><strong>LEAD_PIPELINE.md</strong></td>
-          <td>Current file</td>
-          <td><span class="badge green">No changes</span></td>
-        </tr>
-        <tr>
-          <td><strong>Database</strong></td>
-          <td>leads.db with test data</td>
-          <td><span class="badge green">Same file</span> — all history carries over</td>
-        </tr>
-        <tr>
-          <td><strong>Telegram config</strong></td>
-          <td>Current</td>
-          <td><span class="badge green">No changes</span></td>
-        </tr>
-      </tbody>
-    </table>
+  <h3>The <code>leads</code> table — all columns</h3>
+  <div class="field-group">
+    <div class="field-group-label">Form data (inserted once, never changed)</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Column</th><th>Type</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>INTEGER PK</td><td>Auto-incremented. Becomes the lead ID shown in Telegram.</td></tr>
+          <tr><td><code>first_name</code></td><td>TEXT NOT NULL</td><td></td></tr>
+          <tr><td><code>last_name</code></td><td>TEXT</td><td>Nullable — split from <code>name</code> for DairyTech/MSS leads.</td></tr>
+          <tr><td><code>email</code></td><td>TEXT NOT NULL</td><td>Indexed. Used for duplicate detection.</td></tr>
+          <tr><td><code>business_type</code></td><td>TEXT NOT NULL</td><td>Trakop: dropdown value. DairyTech: mapped from <code>business_domain</code>. MSS: inferred from message.</td></tr>
+          <tr><td><code>company_name</code></td><td>TEXT</td><td>Nullable. May be inferred from email domain.</td></tr>
+          <tr><td><code>country</code></td><td>TEXT</td><td></td></tr>
+          <tr><td><code>phone_number</code></td><td>TEXT</td><td></td></tr>
+          <tr><td><code>requirements</code></td><td>TEXT NOT NULL</td><td>MSS leads: mapped from <code>message</code>.</td></tr>
+          <tr><td><code>orders_per_day</code></td><td>TEXT</td><td>Trakop only. Nullable for DairyTech/MSS.</td></tr>
+          <tr><td><code>customers_served</code></td><td>TEXT</td><td>Trakop only. Nullable for DairyTech/MSS.</td></tr>
+          <tr><td><code>raw_payload</code></td><td>TEXT</td><td>Full original form JSON stored verbatim.</td></tr>
+          <tr><td><code>source</code></td><td>TEXT DEFAULT 'webhook'</td><td>Set in Stage 2 update: <code>trakop</code>, <code>dairytech</code>, or <code>mss</code>.</td></tr>
+          <tr><td><code>created_at</code></td><td>DATETIME</td><td>Auto-generated at insert time.</td></tr>
+          <tr><td><code>updated_at</code></td><td>DATETIME</td><td>Updated on every write.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="field-group">
+    <div class="field-group-label">Stage 1 — Validation flags</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Column</th><th>Type</th><th>Set when</th></tr></thead>
+        <tbody>
+          <tr><td><code>status</code></td><td>TEXT DEFAULT 'new'</td><td>Progresses through: <code>new → qualified → icp_scored → research_done → ready → notified</code>. Can also be <code>spam / duplicate / incomplete / competitor / rejected</code>.</td></tr>
+          <tr><td><code>is_spam</code></td><td>BOOLEAN</td><td>Stage 1.2</td></tr>
+          <tr><td><code>is_duplicate</code></td><td>BOOLEAN</td><td>Stage 1.3 — set on the original record when a re-submission is detected</td></tr>
+          <tr><td><code>is_competitor</code></td><td>BOOLEAN</td><td>Stage 1.4 or Stage 3b</td></tr>
+          <tr><td><code>is_incomplete</code></td><td>BOOLEAN</td><td>Stage 1.1</td></tr>
+          <tr><td><code>spam_reason</code></td><td>TEXT</td><td>Explanation for spam flag</td></tr>
+          <tr><td><code>duplicate_of_id</code></td><td>INTEGER FK</td><td>Points to the original lead ID</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="field-group">
+    <div class="field-group-label">Stage 2 — ICP Scoring</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Column</th><th>Type</th><th>Values</th></tr></thead>
+        <tbody>
+          <tr><td><code>icp_score</code></td><td>INTEGER</td><td>0–100 (normalised from raw max 110)</td></tr>
+          <tr><td><code>icp_tier</code></td><td>TEXT</td><td><code>HOT</code> / <code>WARM</code> / <code>COOL</code> / <code>COLD</code></td></tr>
+          <tr><td><code>company_size</code></td><td>TEXT</td><td><code>Individual</code> / <code>Small</code> / <code>Mid</code> / <code>Enterprise</code></td></tr>
+          <tr><td><code>estimated_revenue</code></td><td>TEXT</td><td>Direct figure, proxy calculation, or "Not found"</td></tr>
+          <tr><td><code>industry</code></td><td>TEXT</td><td>Industry category</td></tr>
+          <tr><td><code>solution_fit</code></td><td>TEXT</td><td><code>High</code> / <code>Medium</code> / <code>Low</code></td></tr>
+          <tr><td><code>solution_product</code></td><td>TEXT</td><td>E.g. "Dairy/Milk Management Software", "DairyTech.ai Dairy ERP"</td></tr>
+          <tr><td><code>needs_solution</code></td><td>BOOLEAN</td><td>Stored as integer 1</td></tr>
+          <tr><td><code>icp_notes</code></td><td>TEXT</td><td>Short sanitised scoring notes (under 150 chars for DB; full version in Telegram)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="field-group">
+    <div class="field-group-label">Stage 3 — Company Research</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Column</th><th>Values stored</th></tr></thead>
+        <tbody>
+          <tr><td><code>company_website</code></td><td>URL or "Not found"</td></tr>
+          <tr><td><code>company_linkedin</code></td><td>URL or "Not found"</td></tr>
+          <tr><td><code>company_description</code></td><td>1–2 sentences (sanitised, under 150 chars)</td></tr>
+          <tr><td><code>key_contacts</code></td><td>Names and titles (sanitised)</td></tr>
+          <tr><td><code>tech_stack</code></td><td>Comma-separated tools found in search results</td></tr>
+          <tr><td><code>recent_news</code></td><td>Brief notable item (under 150 chars)</td></tr>
+          <tr><td><code>estimated_revenue</code></td><td>Updated from Stage 3 findings if better data found</td></tr>
+          <tr><td><code>research_summary</code></td><td>Short sanitised version for DB — full 8–12 bullet version goes in Telegram only</td></tr>
+          <tr><td><code>research_data</code></td><td>Full research JSON dump (reserved)</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <h3>Steps to go live — the production handover checklist</h3>
-
-<pre><span class="c"># Step 1 — Set up permanent Cloudflare tunnel (one-time)</span>
-<span class="k">cloudflared</span> tunnel login
-<span class="k">cloudflared</span> tunnel create trakop-lead-pipeline
-<span class="k">cloudflared</span> tunnel route dns trakop-lead-pipeline leads.yourdomain.com
-<span class="k">sudo cloudflared</span> service install
-<span class="c"># Result: https://leads.yourdomain.com — permanent URL, survives all reboots</span>
-
-<span class="c"># Step 2 — Set up server.js as auto-restarting service</span>
-<span class="k">npm</span> install -g pm2
-<span class="k">pm2</span> start scripts/server.js --name <span class="s">"lead-proxy"</span>
-<span class="k">pm2</span> save && pm2 startup
-<span class="c"># server.js now restarts automatically on crash or reboot</span>
-
-<span class="c"># Step 3 — Company sets up HubSpot Workflow (in their paid account)</span>
-<span class="c"># Automation → Workflows → Create → Contact-based</span>
-<span class="c"># Trigger: Form submission → their Trakop enquiry form</span>
-<span class="c"># Action: Send webhook</span>
-<span class="c">#   Method: POST</span>
-<span class="c">#   URL: https://leads.yourdomain.com/submit</span>
-<span class="c">#   Header: Authorization: Bearer WEBHOOK_SECRET</span>
-<span class="c">#   Body: map fields (firstname→first_name etc.)</span></pre>
-
-  <div class="callout success">
-    <strong>What to remove from the testing setup</strong>
-    Stop the manual <code>cloudflared tunnel --url ...</code> command. Stop running server.js from Terminal (PM2 handles it now). Your test HubSpot account can be abandoned — nothing to uninstall, just stop using it.
+  <h3>Additional tables</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-eyebrow">pipeline_log</div>
+      <h4>Full audit trail</h4>
+      <p>Every pipeline event — DB command, failure, stage transition — can be logged here by the AI agent. Fields: <code>lead_id</code>, <code>stage</code>, <code>action</code>, <code>result</code>, <code>error</code>, <code>created_at</code>. Useful for debugging failed runs.</p>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow">competitors</div>
+      <h4>Competitor watchlist</h4>
+      <p>Domains the system should flag and reject. Can be extended at any time via <code>db.js add-competitor</code>. Combined with a hardcoded list of known delivery software competitors (Tookan, OnFleet, Routific, etc.).</p>
+    </div>
   </div>
 </div>
 
 <hr>
 
-<!-- ─── SECTION 8: MONITORING ─── -->
-<div class="section" id="monitoring">
-  <div class="eyebrow">Section 08 — Monitoring and troubleshooting</div>
-  <h2>How to check the system and fix problems</h2>
+<!-- ─── SECTION 9: TELEGRAM OUTPUT ─── -->
+<div class="section" id="telegram">
+  <div class="eyebrow">Section 09 — Telegram Output</div>
+  <h2>What the sales team receives</h2>
+  <p>Every lead generates exactly one Telegram notification, regardless of outcome. The format depends on what the pipeline found. There are four distinct notification types.</p>
 
-  <h3>Daily health — useful Terminal commands</h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Command</th><th>What it tells you</th></tr></thead>
+      <thead><tr><th>Notification type</th><th>Trigger</th><th>Contains</th></tr></thead>
       <tbody>
-        <tr><td><code>openclaw gateway status</code></td><td>Is OpenClaw running? Port? Any warnings about nvm?</td></tr>
-        <tr><td><code>openclaw logs --follow</code></td><td>Live stream of everything OpenClaw is doing right now — watch agent sessions in real time</td></tr>
-        <tr><td><code>node scripts/db.js recent</code></td><td>Last 20 leads — status, ICP score, timestamp</td></tr>
-        <tr><td><code>node scripts/db.js stats</code></td><td>Count of leads grouped by status (notified, spam, rejected, qualified, etc.)</td></tr>
-        <tr><td><code>node scripts/db.js get &lt;id&gt;</code></td><td>Full details of one specific lead including all research findings</td></tr>
-        <tr><td><code>node scripts/db.js status spam</code></td><td>All flagged spam submissions</td></tr>
-        <tr><td><code>node scripts/db.js status notified</code></td><td>All successfully processed and delivered leads</td></tr>
-        <tr><td><code>cat /tmp/openclaw/openclaw-*.log | tail -100</code></td><td>Last 100 lines of the raw OpenClaw gateway log</td></tr>
-        <tr><td><code>openclaw doctor --repair</code></td><td>Fixes the nvm Node path warning — run this if the gateway crashes after a Mac Mini restart</td></tr>
+        <tr><td><span class="badge red">LEAD FLAGGED</span></td><td>Stage 1: incomplete, spam, or competitor</td><td>Lead details, flag reason, pipeline stopped message</td></tr>
+        <tr><td><span class="badge amber">LEAD FLAGGED — DUPLICATE</span></td><td>Stage 1: email already in database</td><td>Current submission details + full original lead report (ICP score, research, contacts, requirements)</td></tr>
+        <tr><td><span class="badge gray">LEAD REJECTED — COLD</span></td><td>Stage 2: ICP score &lt; 30</td><td>Score breakdown, reason for rejection</td></tr>
+        <tr><td><span class="badge gray">LEAD REJECTED — COLD (POST-RESEARCH)</span></td><td>Stage 3b: revised score drops below 30</td><td>All research bullets with source URLs + validation findings + revised score + rejection reason</td></tr>
+        <tr><td><span class="badge green">NEW LEAD #{id}</span></td><td>Stage 4: lead cleared all filters</td><td>Full report (see annotated example below)</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h3>Common problems and how to fix them</h3>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Symptom you see</th><th>Most likely cause</th><th>Fix</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>Form shows "Could not reach pipeline"</td>
-          <td>Cloudflare tunnel not running, or URL changed after restart</td>
-          <td>Start tunnel: <code>cloudflared tunnel --url http://127.0.0.1:8080</code>. Copy new URL into <code>TUNNEL_URL</code> in index.html.</td>
-        </tr>
-        <tr>
-          <td>Form submits but no Telegram message arrives</td>
-          <td>OpenClaw is down, or the AI agent errored mid-pipeline</td>
-          <td>Run <code>openclaw gateway status</code>. Check <code>openclaw logs --follow</code>. Look up lead in DB: <code>db.js get &lt;id&gt;</code> to see what stage it stopped at.</td>
-        </tr>
-        <tr>
-          <td>"502 Bad Gateway" error</td>
-          <td>server.js not running</td>
-          <td>Run <code>node scripts/server.js</code> in Terminal. In production, run <code>pm2 restart lead-proxy</code>.</td>
-        </tr>
-        <tr>
-          <td>Lead saved in DB but status stuck at "qualified"</td>
-          <td>AI agent session failed part-way through</td>
-          <td>Check <code>openclaw logs</code> for that session's error. Usually a z.ai API timeout. Resubmit the lead.</td>
-        </tr>
-        <tr>
-          <td>Research always shows "Not found" for everything</td>
-          <td>Web search tool disabled, or z.ai API is down</td>
-          <td>Check z.ai service status. Verify <code>openclaw.json</code> includes <code>web_search</code> in the tools list.</td>
-        </tr>
-        <tr>
-          <td>Gateway crashes every time Mac Mini restarts</td>
-          <td>nvm Node path issue (known OpenClaw warning)</td>
-          <td>Run <code>openclaw doctor --repair</code>, then reload: <code>launchctl load ~/Library/LaunchAgents/ai.openclaw.gateway.plist</code></td>
-        </tr>
-        <tr>
-          <td>Leads processing in wrong order / missing</td>
-          <td>Concurrent submissions during a busy period</td>
-          <td>Each lead is isolated — they run in parallel and cannot block each other. Check DB for all recent leads — none should be lost.</td>
-        </tr>
-      </tbody>
-    </table>
+  <h3>Full lead report — annotated</h3>
+  <p>This is the Stage 4 output the sales team receives. Based on a real pipeline run for a Trakop lead.</p>
+
+  <div class="telegram-preview">
+    <div class="tg-bubble">
+      <div class="tg-label">Telegram · Lead Automation Bot · Sales Channel</div>
+      <pre><span style="color:#64b5f6;font-weight:600;">NEW LEAD #169</span>
+<span style="color:#81c784;">Source: Trakop</span>
+
+<span style="color:white;font-weight:600;">Rajesh Kumar</span>
+payodadairy@gmail.com | +919876543210
+Payoda Dairy | India
+Business Type: Milk or Dairy Products
+
+ICP Score: 92/100 (HOT)
+Company Size: Mid
+Est. Revenue: Est. ~$432K/yr (800 customers × $45/mo)
+Solution Fit: High — Dairy/Milk Management Software
+Orders/day: 500 | Customers: 500
+
+Website: https://www.payodadairy.com/
+LinkedIn: https://pe.linkedin.com/company/payodadairyfarms
+Key Contacts: Suresh Satapathy — CEO | Akshay Samal — COO
+
+Requirements:
+We are struggling to manage our daily subscription changes
+manually and need to track empty bottle returns while
+automating our billing cycles for 500+ daily subscribers.
+
+Research Summary:
+
+• Official website: fresh milk home delivery in Gurgaon
+  with online ordering (payodadairy.com)
+
+• Expanded to Gurgaon, Bhiwadi, Manesar, Dharuhera
+  (revoi.in — farm-to-table dairy expansion article)
+
+• CEO Suresh Satapathy, COO Akshay Samal, Director Sasmita Dass
+  (revoi.in company profile)
+
+• 87 LinkedIn followers, doorstep subscription delivery
+  (linkedin.com/company/payodadairyfarms)
+
+• Google Play app: customer login, milk dashboard, billing,
+  rescheduling (play.google.com/store/apps)
+
+Validation:
+
+• Business type confirmed — dairy subscription delivery with
+  reusable glass bottles verified across 3 sources
+
+• Scale not independently verified — public sources confirm
+  regional ops but not the 500-subscriber count
+
+• Note: Trakop has a 2024 client story for Payoda — treat
+  as possible reactivation or upsell lead
+
+ICP Score Reasoning:
+
+• A. Business Model Fit: 30/30 — Core dairy subscription use
+  case. Explicit mentions of subscriptions + bottle returns.
+
+• B. Scale: 25/25 — 500 orders/day, 500 customers, right in
+  Trakop sweet spot.
+
+• C. Pain Points: 25/25 — Manual subscription changes, bottle
+  tracking, billing cycles — maps directly to Trakop features.
+
+• D. Decision Maker: 11/20 — Company provided, named contact,
+  but Gmail email and role unverified.
+
+• E. Geography: 10/10 — India, strong Trakop market.
+
+• Total: 101/110 → Normalised: 92/100 (HOT)
+
+Sales Enablement (To Ease Your Workflow):
+
+• Icebreaker: "Payoda expanded to four cities — managing
+  subscription pauses and bottle returns across that spread
+  gets messy fast without automation."
+
+• Hypothesized Pain Point: With 500+ daily subscribers,
+  the biggest leak is subscription changes not syncing
+  with driver rounds, billing, and bottle return balances.
+
+• Pitch Strategy: Lead with Subscription Order Management
+  and Container Tracking. If they've used Trakop before,
+  frame as reactivation — audit why manual work persists.</pre>
+    </div>
   </div>
 
-  <h3>System reliability — honest assessment</h3>
-  <div class="card-grid">
-    <div class="card" style="border-left:4px solid var(--green)">
-      <div class="card-eyebrow" style="color:var(--green)">Strong ✅</div>
-      <h4>Pipeline logic and error handling</h4>
-      <p>The 4-stage structure is well-designed. Early exits prevent wasted AI calls. The sales team is always notified, even for junk. Isolated sessions mean one slow lead cannot block others.</p>
-    </div>
-    <div class="card" style="border-left:4px solid var(--green)">
-      <div class="card-eyebrow" style="color:var(--green)">Strong ✅</div>
-      <h4>Complete audit trail</h4>
-      <p>Every action at every stage is logged to <code>pipeline_log</code> in the database. You can always look up exactly what happened to any lead — what stage it reached, what decision was made, why.</p>
-    </div>
-    <div class="card" style="border-left:4px solid var(--amber)">
-      <div class="card-eyebrow" style="color:var(--amber)">Watch this ⚠</div>
-      <h4>Mac Mini uptime dependency</h4>
-      <p>The whole system runs locally. If the Mac Mini sleeps, loses power, or loses internet, submissions fail. Set System Settings → Energy Saver → Never sleep. Consider a UPS (battery backup) for the Mac Mini.</p>
-    </div>
-    <div class="card" style="border-left:4px solid var(--amber)">
-      <div class="card-eyebrow" style="color:var(--amber)">Watch this ⚠</div>
-      <h4>z.ai API dependency</h4>
-      <p>The AI model is called via the z.ai API. If that service is down or rate-limited, agent sessions will fail. Test what the pipeline does in this scenario and whether OpenClaw retries automatically.</p>
-    </div>
-  </div>
+  <h3>Duplicate notification — what it looks like</h3>
+  <p>When the pipeline detects a duplicate email, it fetches the original lead's full record from the database and includes it in the notification. The team can see both the new submission and the complete original report side by side.</p>
 
   <div class="callout info">
-    <strong>Before going to production — hardening checklist</strong>
-    Run <code>openclaw doctor --repair</code> (fixes nvm warning). Set up server.js with PM2 (auto-restart). Set Mac Mini to never sleep. Set up a permanent named Cloudflare tunnel (stable URL). Run a full end-to-end test after every configuration change. Monitor the log file weekly: <code>/tmp/openclaw/openclaw-*.log</code>.
+    <strong>Why this matters</strong>
+    A duplicate submission could mean the prospect re-submitted, someone from the same company submitted again, or a sales handoff failed and the lead is circling back. Including the original report means the team can immediately see the history — was the original lead HOT? Was it already contacted? What did the research find? — without needing to look anything up.
   </div>
-
-  <h3>Quick reference — testing session startup</h3>
-<pre><span class="c"># Every time you start a testing session:</span>
-
-<span class="c"># Terminal tab 1 — keep this open the whole session</span>
-<span class="k">cloudflared</span> tunnel --url http://127.0.0.1:8080
-<span class="c"># Copy the https://xyz.trycloudflare.com URL it gives you</span>
-<span class="c"># Update TUNNEL_URL in form/index.html if it changed</span>
-
-<span class="c"># Terminal tab 2</span>
-<span class="k">node</span> scripts/server.js
-
-<span class="c"># OpenClaw — already running as daemon, nothing to do</span>
-
-<span class="c"># Check things are working:</span>
-<span class="k">openclaw</span> gateway status
-<span class="k">node</span> scripts/db.js recent</pre>
-
 </div>
 
-</div><!-- end .page -->
+<hr>
+
+<!-- ─── SECTION 10: ERROR HANDLING ─── -->
+<div class="section" id="errors">
+  <div class="eyebrow">Section 10 — Error Handling</div>
+  <h2>What happens when things go wrong</h2>
+  <p>The pipeline is built around one core principle: an imperfect result delivered is always better than a perfect result that never arrives. No failure at any stage — database errors, search tool failures, or even unexpected crashes — is allowed to silently stop the pipeline without a Telegram notification.</p>
+
+  <h3>Error hierarchy</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Failure type</th><th>What happens</th><th>Does pipeline stop?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>DB command fails</strong></td><td>Log the error. Keep all data in memory. Proceed to next step. Retry only if it was a JSON formatting error the agent made — once only.</td><td>Never</td></tr>
+        <tr><td><strong>DB insert fails</strong></td><td>Set <code>lead_id = null</code>. Skip all subsequent DB writes that need an ID. Still proceed to Stage 2 and send Telegram at Stage 4.</td><td>Never</td></tr>
+        <tr><td><strong>Single web search fails</strong></td><td>One attempt on primary tool → one attempt on fallback → if both fail → mark "Not found" → next query. Never try a third tool for the same query.</td><td>Never</td></tr>
+        <tr><td><strong>All web searches fail</strong></td><td>Log "Web search unavailable". Set all research fields to "Not found". Proceed immediately to Stage 3b with form data only.</td><td>Never</td></tr>
+        <tr><td><strong>Stage crashes / unhandled error</strong></td><td>Global catch-all: collect whatever data exists in memory at the point of failure. Send a Telegram notification with all available fields — use "Error — not retrieved" for anything that could not be populated.</td><td>Telegram always sent</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout danger">
+    <strong>Loop detection</strong>
+    Before every DB command or web search, the agent checks: "Have I run this exact action before in this pipeline run?" If yes → mark it failed → advance immediately. This prevents the agent from getting stuck in a retry loop on a command it has already attempted. Same action twice = failed action, no exceptions.
+  </div>
+
+  <h3>Shell command JSON safety</h3>
+  <p>All database commands pass values inside a JSON string wrapped in single quotes. This means certain characters must be sanitised before building the shell command. The agent does this before every DB write:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Character</th><th>Replace with</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td><code>'</code> (apostrophe)</td><td>space or omit</td><td>Would break the outer single-quote shell wrapping</td></tr>
+        <tr><td><code>"</code> (double quote)</td><td>space or omit</td><td>Would break the JSON string values</td></tr>
+        <tr><td><code>`</code> (backtick)</td><td>remove</td><td>Shell command substitution</td></tr>
+        <tr><td><code>\n</code> <code>\r</code> (newlines)</td><td>space</td><td>Breaks multi-line shell arguments</td></tr>
+        <tr><td><code>\</code> (backslash)</td><td>remove</td><td>Escape sequence ambiguity</td></tr>
+        <tr><td><code>&amp;</code> (ampersand)</td><td><code>and</code></td><td>Shell background process operator</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Long text fields (<code>icp_notes</code>, <code>research_summary</code>, <code>company_description</code>) are stored as a short sanitised version under 150 characters. The full version is used only in the Telegram output.</p>
+</div>
+
+<hr>
+
+<!-- ─── SECTION 11: ABSOLUTE RULES ─── -->
+<div class="section" id="rules">
+  <div class="eyebrow">Section 11 — Absolute Rules</div>
+  <h2>The 19 non-negotiable rules</h2>
+  <p>These rules are embedded in <code>LEAD_PIPELINE.md</code> and override everything else. The AI agent is instructed to treat these as hard constraints — no exceptions, no edge cases.</p>
+
+  <ol class="rule-list">
+    <li><strong>Duplicate check runs BEFORE insert.</strong> Never insert first and check after. This is fixed and non-negotiable.</li>
+    <li><strong>Always send Telegram.</strong> Every lead gets a notification — flagged, rejected, or full report.</li>
+    <li><strong>Never invent data.</strong> If you cannot cite a search result for a claim — use "Not found."</li>
+    <li><strong>Training data is banned in Stages 3 and 3b.</strong> Every company-specific fact must come from a web search result returned in this session.</li>
+    <li><strong>DB failures never stop the pipeline.</strong> Log the error, keep data in memory, move forward.</li>
+    <li><strong>Web search failures never stop the pipeline.</strong> Log failed queries, fill affected fields as "Not found", move forward.</li>
+    <li><strong>Never loop.</strong> Same action twice = failed action. Mark it and advance immediately.</li>
+    <li><strong>Stage 3b always runs.</strong> Even if Stage 3 found nothing. Even if all searches failed.</li>
+    <li><strong>Stage 4 always runs</strong> unless the pipeline stopped at Stage 1 or Stage 2 cold rejection. Even on unexpected crashes — the global catch-all applies: send a Telegram with whatever data is available.</li>
+    <li><strong>Never read local source files.</strong> Do not inspect db.js or any other script. Only run the documented CLI commands.</li>
+    <li><strong>Sales Enablement must be specific.</strong> Generic filler is a failure. Reference actual research findings or specific form data.</li>
+    <li><strong>ICP tier values are always uppercase:</strong> HOT, WARM, COOL, COLD — never mixed case.</li>
+    <li><strong>COOL leads (30–49) always proceed to Stage 3.</strong> Never reject COOL without research confirmation.</li>
+    <li><strong><code>lead_id</code> is always the integer from the insert output.</strong> Never guess it or use a placeholder in a DB command — skip the command instead if the ID is unknown.</li>
+    <li><strong>Sanitise <code>&amp;</code> before every shell command.</strong> Replace with <code>and</code> in all field values.</li>
+    <li><strong>Integer values in JSON must be bare numbers, not quoted strings.</strong> <code>"icp_score":78</code> not <code>"icp_score":"78"</code>.</li>
+    <li><strong>Source detection runs first, before Stage 1.</strong> Always identify and store the source (<code>trakop</code>, <code>dairytech</code>, <code>mss</code>). The source drives ICP scoring, research queries, solution_product, and pitch strategy.</li>
+    <li><strong>Post-research rejections use the Post-Research Cold Rejection Telegram format.</strong> If a lead is rejected in Stage 3b, include all research findings and validation bullets — not just the ICP score and reason.</li>
+    <li><strong>ICP scoring must match the detected source.</strong> Do not score a DairyTech.ai lead with Trakop ICP criteria or vice versa.</li>
+  </ol>
+</div>
+
+</div><!-- /page -->
 
 <div class="footer">
-  TRAKOP LEAD AUTOMATION SYSTEM &nbsp;·&nbsp; SYSTEM EXPLAINER v2.0 &nbsp;·&nbsp; MAY 2026 &nbsp;·&nbsp; MASTER SOFTWARE SOLUTIONS &nbsp;·&nbsp; INTERNAL DOCUMENTATION
+  Master Software Solutions · Lead Automation Platform Documentation · May 2026 · Internal use only
 </div>
 
 </body>
